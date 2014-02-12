@@ -1,0 +1,40 @@
+module.directive('cidsComboBox', ['$http', function($http) {
+    return {
+        restrict: 'E',
+        require: "^ngModel",
+        replace: true,
+        template: '<select data-ng-disabled="{{isRenderer}}" 
+			data-ng-nodel=model 
+			data-ng-options="bean as bean.{{displayText}} for bean in cidsBeanOptions">
+			</select>',
+        scope: {
+            ngModel: '=',
+            displayText: "@",
+            isRenderer: '='
+        },
+        link: function(scope, elem, attrs) {
+
+	     ...
+
+             var loadBeans = function() {
+                  var selfRef, classUrl, className;
+                  selfRef = scope.ngModel['$self'];
+                  className = selfRef.split('.')[1].split('/')[0];
+                  classUrl = "data/" + className + ".json";
+                  classUrl = classUrl.toLowerCase();
+                   return $http({method: 'GET', url: classUrl});
+             };
+
+             var watch = scope.$watch('ngModel', function(value) {
+                  if (value) {
+                      var promise = loadBeans();
+                      promise.success(function(data, status, headers, config) {
+             	         scope.cidsBeanOptions = data;
+                         scope.ngModel = getSelectedOptionForSelectElement();
+                         watch();
+                      });
+                  }
+             });
+        }
+    };
+}]);

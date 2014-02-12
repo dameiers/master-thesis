@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+ <head>
+ </head>
+ <body data-ng-controller="VermessungRissController">
+  ...
+  <input data-ng-disabled="isRenderer" data-ng-model="cidsBean.schluessel"/
+  ...
+  <input data-ng-disabled="isRenderer" data-ng-model="cidsBean.schluessel"/
+  ...
+</body>
+</html>
+

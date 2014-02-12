@@ -1,0 +1,19 @@
+%-----------Abkürzungsverzeichnis---------------
+
+%there are two ways to make abbreviations
+%the traditional way
+%\usepackage[intoc]{nomencl}
+% Befehl umbenennen in abbr
+%\let\abbr\nomenclature
+% Deutsche Überschrift
+%\renewcommand{\nomname}{Abkürzungsverzeichnis}
+% Punkte zw. Abkürzung und Erklärung
+%\setlength{\nomlabelwidth}{.20\hsize}
+%\renewcommand{\nomlabel}[1]{#1 \dotfill}
+% Zeilenabstände verkleinern
+%\setlength{\nomitemsep}{-\parsep}
+%\makenomenclature
+
+%Gilles prefered way
+%normal abbrev can be generated with \ac. \ac{abbr.} will result in Abbreviation (abbr.)
+\usepackage[printonlyused]{acronym}

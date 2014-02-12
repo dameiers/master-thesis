@@ -1,0 +1,39 @@
+\include{header}
+\title{%
+\large Master Thesis\\
+\\[20mm]
+{\LARGE Integration of Web UI Technologies in cids Navigator}\\[30mm]
+}
+
+
+\author{
+Daniel Meiers\\
+Matriculation.No.: 3538990\\
+daniel.meiers@cismet.de\\[15mm]
+%First Examiner: Denzer /Guettler\\
+%Second Examiner: Guettler / Denzer\\
+%Adivisors: Thorsten Hell\\[20mm]
+}
+
+\begin{document}
+
+\maketitle
+
+% only for communciation with prof. Denzer / Güttler...
+%\include{dow_html_renderer}
+
+\include{00_abstract}
+\tableofcontents
+
+%\include{01_introduction}
+%\include{02_web_development}
+%\include{03_conception}
+%\include{04_technology_analysis}
+%\include{04_js_fw_comparison}
+%\include{04_implementation}
+%\include{05_discussion}
+
+\listoffigures
+\printbibliography
+
+\end{document}

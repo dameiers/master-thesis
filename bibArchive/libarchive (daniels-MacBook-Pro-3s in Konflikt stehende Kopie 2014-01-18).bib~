@@ -1,0 +1,243 @@
+@article{OS5/2011,
+  title={Schwerpunkt-Probieren geht {\"u}er studieren: Testgetriebene Wiederverwendung von Softwareobjekten},
+  author={Hummel, O. and Janjic, W.},
+  journal={Objekt Spektrum},
+  number={5},
+  pages={8},
+  year={2011}
+}
+
+@book{Bec02,
+  added-at = {2010-11-23T14:22:43.000+0100},
+  asin = {0321146530},
+  author = {Beck, Kent},
+  biburl = {http://www.bibsonomy.org/bibtex/293ecb16d97b64f51a8cb72ab54dca15a/schmidt2},
+  description = {Test Driven Development. By Example Addison-Wesley Signature: Amazon.de: Kent Beck: Englische Bücher},
+  dewey = {005.14},
+  ean = {9780321146533},
+  interhash = {ce3a9459ac3d0b3d47518f186cae5809},
+  intrahash = {93ecb16d97b64f51a8cb72ab54dca15a},
+  isbn = {0321146530},
+  keywords = {addison-wesley books kent_beck},
+  publisher = {Addison-Wesley Longman, Amsterdam},
+  timestamp = {2010-11-23T14:22:43.000+0100},
+  title = {Test Driven Development. By Example (Addison-Wesley Signature)},
+  year = 2002
+}
+
+@article{diaz,
+ author = {Prieto-D\'{\i}az, Rub{\'e}n},
+ title = {Status Report: Software Reusability},
+ journal = {IEEE Softw.},
+ issue_date = {May 1993},
+ volume = {10},
+ number = {3},
+ month = may,
+ year = {1993},
+ issn = {0740-7459},
+ pages = {61--66},
+ numpages = {6},
+ url = {http://dx.doi.org/10.1109/52.210605},
+ doi = {10.1109/52.210605},
+ acmid = {625292},
+ publisher = {IEEE Computer Society Press},
+ address = {Los Alamitos, CA, USA},
+ keywords = {software engineering, software productivity, software quality, software reusability},
+} 
+
+@inproceedings{Gar06,
+  title={Toward a code search engine based on the state-of-art and practice},
+  author={Garcia, V.C. and de Almeida, E.S. and Lisboa, L.B. and Martins, A.C. and Meira, S.R.L. and Lucredio, D. and de M Fortes, RP},
+  booktitle={Software Engineering Conference, 2006. APSEC 2006. 13th Asia Pacific},
+  pages={61--70},
+  year={2006},
+  organization={IEEE}
+}
+
+@article{Hum08,
+  title={Code conjurer: Pulling reusable software out of thin air},
+  author={Hummel, O. and Janjic, W. and Atkinson, C.},
+  journal={Software, IEEE},
+  volume={25},
+  number={5},
+  pages={45--52},
+  year={2008},
+  publisher={IEEE}
+}
+
+@inproceedings{Hum10,
+ author = {Hummel, Oliver and Atkinson, Colin},
+ title = {Automated creation and assessment of component adapters with test cases},
+ booktitle = {Proceedings of the 13th international conference on Component-Based Software Engineering},
+ series = {CBSE'10},
+ year = {2010},
+ isbn = {3-642-13237-5, 978-3-642-13237-7},
+ location = {Prague, Czech Republic},
+ pages = {166--181},
+ numpages = {16},
+ url = {http://dx.doi.org/10.1007/978-3-642-13238-4_10},
+ doi = {10.1007/978-3-642-13238-4_10},
+ acmid = {2176918},
+ publisher = {Springer-Verlag},
+ address = {Berlin, Heidelberg},
+} 
+
+@article{Kru92,
+ author = {Krueger, Charles W.},
+ title = {Software reuse},
+ journal = {ACM Comput. Surv.},
+ issue_date = {June 1992},
+ volume = {24},
+ number = {2},
+ month = jun,
+ year = {1992},
+ issn = {0360-0300},
+ pages = {131--183},
+ numpages = {53},
+ url = {http://doi.acm.org/10.1145/130844.130856},
+ doi = {10.1145/130844.130856},
+ acmid = {130856},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ keywords = {abstraction, cognitive distance, software reuse},
+} 
+
+@article{Mil98,
+ author = {Mili, A. and Mili, R. and Mittermeir, R. T.},
+ title = {A survey of software reuse libraries},
+ journal = {Ann. Softw. Eng.},
+ issue_date = {1998},
+ volume = {5},
+ month = jan,
+ year = {1998},
+ issn = {1022-7091},
+ pages = {349--414},
+ numpages = {66},
+ url = {http://dl.acm.org/citation.cfm?id=590631.590637},
+ acmid = {590637},
+ publisher = {J. C. Baltzer AG, Science Publishers},
+ address = {Red Bank, NJ, USA},
+} 
+
+@article{McC05,
+    author = {Frank Mccarey and Mel Ó Cinnéide and Nicholas Kushmerick},
+    title = {RASCAL: A Recommender Agent for Agile Reuse},
+    journal = {Artificial Intelligence Review},
+    year = {2005}
+}
+
+@online{sky,
+	title={Sky Werbefilm:Hör auf den Fan in Dir},
+	author={},
+	urldate={2012-09-7},
+	url={http://www.youtube.com/watch?v=JDfmiaHD6ZU}
+}
+
+@online{gall,
+	title={Kapitel 12 - Software Wiederverwendung},
+	author={Harald Gall},
+	urldate={2012-09-7},
+	url={https://files.ifi.uzh.ch/rerg/amadeus/teaching/courses/kvse_ss05/kap12-reuse.pdf}
+}
+
+@book{freeman,
+ editor = {Freeman, P.},
+ title = {Tutorial, software reusability},
+ year = {1987},
+ isbn = {0-818-60750-5},
+ publisher = {IEEE Computer Society Press},
+ address = {Los Alamitos, CA, USA},
+} 
+
+@article{Podgurski,
+ author = {Podgurski, Andy and Pierce, Lynn},
+ title = {Retrieving reusable software by sampling behavior},
+ journal = {ACM Trans. Softw. Eng. Methodol.},
+ issue_date = {July 1993},
+ volume = {2},
+ number = {3},
+ month = jul,
+ year = {1993},
+ issn = {1049-331X},
+ pages = {286--303},
+ numpages = {18},
+ url = {http://doi.acm.org/10.1145/152388.152392},
+ doi = {10.1145/152388.152392},
+ acmid = {152392},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ keywords = {behavior sampling, software libraries, software retrieval, software reuse},
+} 
+
+@inproceedings{Ota07,
+    address = {New York, NY, USA},
+    author = {Ot\'{a}vio Augusto Lazzarini Lemos and Bajracharya, Sushil K. and Ossher, Joel and Morla, Ricardo S. and Masiero, Paulo C. and Baldi, Pierre and Lopes, Cristina V.},
+    booktitle = {Proceedings of the twenty-second IEEE/ACM international conference on Automated software engineering},
+    isbn = {978-1-59593-882-4},
+    keywords = {codegenie, codemap},
+    location = {Atlanta, Georgia, USA},
+    pages = {525--526},
+    posted-at = {2009-08-10 14:35:50},
+    priority = {2},
+    publisher = {ACM},
+    series = {ASE '07},
+    title = {{CodeGenie: using test-cases to search and reuse source code}},
+    url = {http://dx.doi.org/10.1145/1321631.1321726},
+    year = {2007}
+}
+
+@inproceedings{Rei09,
+  address = {Washington, DC, USA},
+  author = {Reiss, Steven P.},
+  booktitle = {Proceedings of the 31st International Conference on Software Engineering},
+  isbn = {978-1-4244-3453-4},
+  keywords = {jabref:noKeywordAssigned},
+  numpages = {11},
+  pages = {243--253},
+  publisher = {IEEE Computer Society},
+  series = {ICSE '09},
+  timestamp = {2011-01-24T17:12:55.000+0100},
+  title = {Semantics-based code search},
+  year = 2009
+}
+
+@online{s6search,
+	title = {S6 Search Page},
+	author={},
+	url = {http://conifer.cs.brown.edu:8180/S6Search/s6search.html},
+	urldate = {2012-09-07}
+}
+
+@online{CC_SF,
+	title = {Code Conjurer - SourceForge.net},
+	author={},
+	url = {http://sourceforge.net/projects/codeconjurer/files/},
+	urldate = {2012-09-08}
+}
+
+@inproceedings{mcilroy68mass,
+  added-at = {2011-12-16T09:31:54.000+0100},
+  address = {Garmisch, Germany},
+  author = {McIlroy, Doug},
+  biburl = {http://www.bibsonomy.org/bibtex/2569a161bf1aa24787b4c0b76c82e8750/pbrada},
+  booktitle = {Proceedings of {NATO} Software Engineering Conference },
+  editor = {Naur, P. and Randell, B.},
+  groups = {public},
+  interhash = {7d18f1f2acae2801dd7e9a5534cb6748},
+  intrahash = {569a161bf1aa24787b4c0b76c82e8750},
+  keywords = {components history concept key-reading},
+  month = {October},
+  pages = {138-155},
+  timestamp = {2011-12-16T09:31:54.000+0100},
+  title = {Mass-Produced Software Components},
+  username = {pbrada},
+  year = 1968
+}
+
+@online{xpTestFirst,
+	title={Extreme Programming - Test First},
+	author={Don Wells},
+	urldate={2012-09-13},
+	url={http://www.extremeprogramming.org/rules/testfirst.html}
+}
+

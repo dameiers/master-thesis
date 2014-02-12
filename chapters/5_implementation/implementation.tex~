@@ -1,0 +1,187 @@
+\chapter{Implementation}\label{chap:implementation}
+
+%\textbf{the  writing plan:}
+%\begin{itemize}
+%\item Introducing Java FX Description pane
+%	\begin{itemize}
+% 	\item besonderheit für build (maven anpassungen)
+%		\item Problem JavaFX auto beenden
+%	\end{itemize}	
+%\item explain exactly how the cids renderer are selected and displayed.
+%\item first idea, Description Pane distinguish the usage of web renderer
+%\item better approach to implement the "coc changes" in the renderer factory
+%\item Designing an interface for the communication 
+%		\begin{itemize}
+%			\item bridge object
+%			\item update problematic, bulk update for cidsBean
+%	\end{itemize}
+%\item Testing and Problems
+%		\begin{itemize}
+%			\item long time for initialisation
+%			\item problem style of combobox elements
+%		\end{itemize}
+%\item Development of an Angular based example renderer for Vermessungrisse
+%\end{itemize}
+
+\section{Integrating the JavaFX WebView}
+
+\subsection{JavaFX WebView based DescriptionPane}
+As a first step it is necessary to integrate the JavaFX WebView into the Description Pane of the navigator. As already mentioned the Description Pane already supports the visualisation of HTML pages to offer additional information for the selected catalogue object. Hence the JavaFX WebView offers much more features than the already used browser APIs (cf \ref{chap:browser_api_comparison}, a useful benefit can be reached using the WebView as browser API also for that case. To ensure a full backward compatibility the usage of the JavaFX WebView is implemented in a configurable manner. The Description Pane is mainly implemented as an abstract class \texttt{DescriptionPane}. This class represents a JPanel and offer basic functionality like the distinction when to load a HTML page or a cids renderer and the loading mechanism for cids renderer. Using a abstract class easily allows to extend the functionality of the \texttt{DescriptionPane} that uses different browser APIs.  Figure\ depicts a class diagram of the \texttt{DescriptionPane} and related classes.
+
+\begin{figure}
+	\centering	\includegraphics[width=1.0\textwidth]{./img/classDiagramms/description_pane.png}
+	\caption{DescriptionPane and relating classes}
+	\label{fig:class_diag_desc_pane}
+\end{figure}
+
+The DescriptionPane panel uses a \texttt{CardLayout} to separate the visualisation of cids renderer from the visualisation of HTML pages. The \texttt{CardLayout} easily allows to programmatically switch between multiple and different panels based on unique names, without taking care of refreshing the GUI by hand. Using this approach the implementation classes of the \texttt{DescriptionPane} can easily implement their own logic and define the tools they use to visualise HTML description pages. It is just necessary to add a panel to the \texttt{DescriptionPane} with the correct identifier that is used in the abstract class. The 3 abstract method shown in figure \ref{fig:class_diag_desc_pane}, are used to provide the HTML encoded information that shall be displayed.
+
+Which concrete implementation of the \texttt{DescriptionPane} is used, is determined during the navigator start and depends on the configuration made in the navigators configuration file. During the Navigator start, the \texttt{PropertyManager} loads the configuration file from the navigator and caches the settings. For each property the PropertyManager has corresponding getter and setter functions. It is implemented as a singleton, which easily allows to use it everywhere where access to the Navigator settings is needed. As already mentioned there are already two existing implementations that uses different browser API. Hence the current implementation uses Calpa as default case, there is only one boolean property called \texttt{useFlyingSaucer} that indicates to use the Description Pane based on Flying Saucer API. One possible solution for introducing a JavaFX based DescriptionPane is to introduce a new property similar to the already existing one. Following this approach has the drawback that there are different properties for configuring the same functionality. Furthermore, the name of the \texttt{"useFlyingSaucer"} property does not indicate very well what functionality is exactly configured. Therefore a new text property \texttt{"navigator.descriptionPane.htmlRenderer"} is introduced, whose value determines which concrete implementation of the \texttt{DescriptionPane} shall be used. To ensure backward compatibility the old properties are still supported, but when they are used a warning is written to the logging mechanism of the application. Additionally, the \texttt{DescriptionPaneCalpa} still functions as fall-back case if no or a invalid value for the property is configured.
+
+For the JavaFX WebView based DescriptionPane, a new class \texttt{DescriptionPaneFX} is generated, that uses a \texttt{JFXPanel} that contains a Java FX WebView for visualising HTML content. This \texttt{JFXPanel} is then used within the DescriptionPane CardLayout as described above. The JFXPanel eases the integration of JavaFX components into Swing. The JFXPanel is a Swing component that acts as JavaFX application runtime container. Normally when developing JavaFX applications, it is necessary to extend the JavaFX Application class, which initializes the JavaFX runtime environment and automatically calls a start(Stage primaryStage) method that needs to be implemented when extending the Application class. Important to note is the Stage parameter of the start() method. A Stage is a top level GUI container that can have several Scenes. The Scences itself are also container classes for contents. This architecture is based on the principal idea of a theatre play. The Stage on a theatre contains multiple scenes, each with a custom look and behaviour. The stage is already constructed by the Application class and it is just necessary to set a scene on that stage.  When using a JFXPanel, there is no start() method that can be executed. Therefore the JFXPanel initializes the JavaFX runtime environment during construction time. The only thing what needs to be done is to set a scene that should be visualised by the JFXPanel which in our case is the WebView. Figure demonstrates the structure of the FX based DescriptionPane.
+
+\todo{add figure}
+
+ Using JavaFX dependent classes requires to integrate the JavaFX library into the classpath. Although this library is shipped with the JRE since version Java SE 7 update 6 (7u6), it is not part of the default netbeans Java classpath. \todo{find a better name} Thus, it is not possible to use and built programs that use JavaFX dependent classes within the Netbeans IDE. Possible solutions to this issue are discussed in \todo{add ref mailinglist}. The first approach is to move the corresponding jar file into an folder that is on the classpath by default, like the ext-folder of the JRE. This has the disadvantage that this adaption needs to be done on every client. Therefore an other solution is preferred. The jfxrt.jar gets defined as system dependency. System dependencies are always available and are not looked up in the maven specific repository, hence it assumes that these dependencies are explicitly provided. Thus way, the JavaFX dependency can be defined in a system and JRE independent way. Additionally it is necessary to add the library to the classpath that is created from Maven for running the application and to avoid a \texttt{java.lang.NoClassDefFoundError}.
+ 
+During the development, two problems occured. The first one was an \texttt{"java.lang.IllegalStateException: Not on FX application thread"} Excpetion. The reason for this quite simple and is based on the fact, that JavaFX components can not be accessed outside the JavaFX application thread. This is similiar to JavaSwing where Swing components should also be accessed only from the Event Dispatch Thread, with the difference that violating this constraint leads to an exception when trying the same in JavaFX. This was a conscious decision from the JavaFX developers hence accessing Swing components outside the Event Dispatch Thread is one of the most reason for errors.
+
+The second problem occured, when switching between a object node that nuges the DescriptionPane to load and show a Swing based cids renderer and a node with an HTML description page. When switching back to the HTML description again an IllegalStateException is thrown, with the message \texttt{"Platform.exit has been called"}. The reason for this is the implementation of the JFXPanel. Hence the JFXPanel automatically starts the JavaFX runtime environment, it must also ensure it is terminated when it is no longer necessary. This is the case when the Scene that the JFXPanel displays is finished and the panel is no longer visible. Hence we use the JFXPanel in a CardLayout the JFXPanel implicitly calls the Platform.exit() method to terminate the JavaFX environment. This implicit termination can be supressed by setting a platform Parameter with the following code:
+
+\begin{lstlisting}[label=implicit_exit][caption=Disable JavaFX implicit exit]
+Platform.setImplicitExit(false);
+\end{lstlisting}
+
+%=> blurry problem?
+
+%first screenshot    
+
+\subsection{Adopting the Convention over Configuration Mechanism}
+
+Up to this point the JavaFX WebView is already integratet into the navigator, but it is still not possible to visualize html applications as renderer for object nodes. As mentioned above, the abstract class DescriptionPane is responsible for loading the corresponding renderer for object nodes. To fully understand what possibilites exists to implement the pending feature, it is necessary to have a closer look on that mechanism. When selecting a node in the cids catalogue, the CatalogueSelectionListener gets notified about this. The CatalogueSelectionListener calls the method setNodeDescription() on the abstract class DescriptionPane. This method makes a series of decisions what exactly should be displayed. 
+
+The first idea to show HTML applications as cids renderer is to customize this setNodeDescription() method and implement the necessary changes there. Hence there can be different DescriptionPane implementations, but only the DescriptionPaneFX can display complex web applications it is necessary to overwrite the setNodeDescription() method there. The code needs to be changed to implement the following logic. If the selected node is a object node, it is necessary to check if for the corresponding cids class the new introduced class attribute isHtmlRenderer is configured. If so, the value of the class attribtue  points to the location of the web application. This URL can be used to call the setPageFromContent()-method. Furthermore the panel that contains the JavaFX WebView needs to be displayed. Listing depicts the new behaviour in pseudo-code
+
+\todo{add listing in pseudo code}
+
+The drawback of this approach is, that it will only work when the usage of DescriptionPaneFX is configured and will not work with the other DescriptionPane implementations. Furhtermore this approach will not fit perfectly into the conceptual design that distincts the display of renderer and description pages. Therefore a more appropriate solution is to adopt the Factories that are responsible for loading the cids renderer and editors for a cids class. As figure \ref{fig:class_diag_desc_pane} depicts the CidsObjectRendererFactory has two different methods for retrieving single and aggregation renderer.  The cids system also allows the definition of an special so called AggregationRenderer which can visualise and aggregate information of multiple objects of the same class. If no aggregation renderer is defined, or objects of different classes are selected, the single renderer for each object are vertically stacked in the DescriptionPane. Therefore it is just necessary to adopt the getSingleRenderer method with the above mentioned changes.
+
+The CidsObjectRendererFactory needs to return a JComponent that represents the cids renderer. Hence the only difference for web application based renderer is the URL that  points to the location of the web application and is configured in the isHtmlRenderer class attribute, it is easily possible to devleop a new renderer class HTMLWidgetRenderer that wraps a JavaFX WebView, and is parameterisable  with the URL of the web application.
+
+Hence this component can also be used for visualising web based editors, class inheritance can be used to inherit the needed functionality from the editor to the renderer and allows the same code base for both cases. This approach heavily relies on the assumption that renderer and editors for single objects have only a different intentional usage and no different graphical user interfaces . A renderer should only visualize information whether a editor can be used to edit the data. Using the same code base for editors and renderer is a very common practice that is  already in many cases when developing cids renderer and editors. Using the same GUI for editors and renderer is possible when all input fields of the editor are disabled. Thus, this needs to be regarded when developing web application renderer . Based on this the following class structure was implemented. \todo{add figure and ref}. Important to note, is the isEditable parameter in the constructor of the HTMLWidgetEditor. This parameter can act as flag if  the web application needs to disable the input fields and needs to be communicated to web application. As figure \todo{add ref} depicts, the HTMLWidgetEditor implements the setCidsBean method, which is called during the loading of the renderers and editors to inject the object into the renderer.
+
+To enable the usage of web applications as cids editors, the only thing left to do is to adopt the CidsObjectEditorFactory in the same manner as the CidsObjectRendererFactory.
+
+\section{Development of an Angular based renderer}
+
+With the current implementation it is already possible to visualise HTML applications as renderer and editors, but currently no web application that was implemented for that purpose exists. Therfore it is necessary to implement an angular based demo application that can be integrated in the cids Navigator as renderer and editor. Without such an application it would be difficult if not impossible to test above mentioned enhencements.
+
+For developing a demo application, an already existing render and editor with a complex cids datastrucutre shall be used and re-implemented in a web application with the same functionality . In WuNDa, an information system based on cids and the cids navigator, it is possible to manage survey plans. The survey plans are a good candidate for a demo application hence their underlaying data structure contains every possible data relation that can be modelled with cids. Figure \ref{fig:survey_plan_data_model} depicts the cids data structure of the survey plans. This data structure is also reflected by the cidsBean that gets injected into the renderer components. The cidsBean acts as the main model of the angular application.
+
+\begin{figure}
+	\centering	\includegraphics[width=1.0\textwidth]{./img/impl/surveyPlan_data_model.png}
+	\caption{Cids data model of survey plans}
+	\label{fig:survey_plan_data_model}
+\end{figure}
+
+Before starting with the implementation of the Angular based renderer, it is necessary to outline the functioniality of the already swing based implementations of the survey plan renderer and editor. Figure \ref{fig:survey_plan_swing_editor} shows the Swing based implementation of the survey plan editor. Besides visualising the main information relating to a survey plan (part a in figure \ref{fig:survey_plan_swing_editor}),  it is also possible to edit the landparcels that are affected of the survey plan (part b in figure \ref{fig:survey_plan_swing_editor}). Area c in figure \ref{fig:survey_plan_swing_editor} shows that the survey plan renderer can also visualise images of historic survey plans documents. The renderer basically has the same functionality, with the exception that not all information are visualised and it is not possible to change any data. Because the implementation of the document feature \todo{find an other name} is more difficult and not mandatory for using the application for testing, this feature is excluded in a first step and can be added later on.
+
+\begin{figure}
+	\centering	\includegraphics[width=1.0\textwidth]{./img/impl/survey_plan_editor_old.png}
+	\caption{Swing based cids editor for survey plans}
+	\label{fig:survey_plan_swing_editor}
+\end{figure}
+
+In fact no data exchange between the navigator and the web application is currently possible, it is required to load the data of an example object from a file until the data exchange is between navigator and web applications is implemented. According to the usual practice when developing web application, the data is represented in the JSON format. Hence the objects in the navigator are usually represented as Java objects, it is necessary to transform and extract the data of survey plan object into the JSON format. For this the toJsonString-method of a CidsBean is used.  
+
+
+\begin{center}
+\label{lst:_survey_web_renderer}
+\begin{minipage}{.45\textwidth}
+  \lstinputlisting{./listings/impl/demo_app/index.html}
+\end{minipage}
+\hfill
+\begin{minipage}{.45\textwidth}
+  \lstinputlisting{./listings/impl/demo_app/app.js}
+\end{minipage}
+\end{center}
+
+A first implementation of the angular based renderer has a very simple structure. Listing \ref{lst:_survey_web_renderer} represents the important parts of the implementations. For the whole application, one controller with one scope can be used. The controller is defined with the built in directive ng-controller. This directive points angular, to use the SurveyPlanController function as the controller function for the application. The controller loads the JSON formatted representation of the survey plan that was generated in the previous step. For this, Angular already offers the \$http service which eases the retrieval of resources in an asynchronous way. When the JSON object is completely loaded, the object can be attached to the \$scope of the controller. In the view we can easily bind properties of the object to arbitrary elements within the view. The look of the application can be easily adopted with some additional Cascading Style Sheets to gain a similar design to the already exisitng swing components. Figure \ref{fig:survey_plan_angular_editor} shows a screenshot of the styled application.
+
+\begin{figure}
+	\centering	\includegraphics[width=1.0\textwidth]{./img/impl/survey_plan_editor_new_alpha.png}
+	\caption{Angular based cids editor for survey plans}
+	\label{fig:survey_plan_angular_editor}
+\end{figure}
+ 
+There are still some remaining issues that distinct the web application from the swing based one. as already mentioned, the same application shall be used as renderer and editor. This means in the case of the demo application that it is necessary to disable the input elements as well as hiding some data fields that are not necessary when the application shall be used as renderer. Therefore a new property on the scope is introduced, that indicates if the application shall be visualised in renderer or editor mode. This property can be used to hide parts of the view and to change the styling of the input fields. Again, angular is prepared with built in directives that allow an easy implementation of both features. The ng-hide directive hides arbitrary HTMl elements based on the expression that is provided to it. For disabling the input fields, the ng-disabled directive can be used. To both directives it is sufficient to bind the \texttt{isRenderer} property to them. When integrating the demo application into the navigator it is necessary to correctly set the isRenderer property depending on the usage as renderer or editor. This is described extensively in the next chapter.
+\todo{listing necessary?}
+
+Another important difference between the Angular and Swing application are the components for visualising the related classes like the geometry status or the format of the survey plan document. In the Swing application Combo Boxes are used to offer the user a fix set of choices he can choose from. The combo box contains all elements of the corresponding cids class. The cidsBean that represents a survey plan only contains the currently selected element of the related cids class however. The Swing based application loads the missing elements in the background based on the meta class of the object. The same needs to be implemented in the Angular based application but requires a working data exchange between the navigator and the web application which is still pending. To ease the integration of this feature afterwards, an java script function that loads all elements of a given cids object is implemented. Hence no data exchange with the cids system is possible, those information are also loaded from a json file based on a naming convention. The following examples demonstrates this. For the field \texttt{geometrie\_status} this method tries to load a file \texttt{geometrie\_status.json} from the server. This data can then be used to create select elements that offer all possibilities. Hence such a Combo Box is a very common and frequently used feature, it is appropriate to implement it as a reusable component. This can be reached with an angular directive. \todo{explain necessary parts of the listing?}  
+
+The features, adding land parcels to the survey plan, setting a geometry that represents the survey plan and visualising historic survey plan images, all require a working data exchange between the navigator and the web application, or are not essential for using the web application as renderer or editor respectively in the navigator. Thus in the next step, the data exchange between the navigator and web applications is implemented first.
+
+\section{Establishing bi-directional data Exchange}
+
+%The HTMLWidgetEditor class implements the CidsObjectRenderer interface which forces the HTMLWidgetEditor class to implement the setCidsBean method. Those method is called from Navigator to inject the data into the renderer.   
+
+With the current state it is already possible to visualise HTML applications as object renderer and editors within the navigator. But what is still missing, is the data exchange between the navigator and the web applications. 
+
+As outlined in chapter \ref{chap:browser_api_comparison}, the JavaFX WebView allows a bi directional communication between the loaded web page and Java. For the first direction, the communication from Java to the web application, the JavaFX WebEngine has a method \texttt{executeScript()}, which allows the execution of arbitrary JavaScript code in the  context of the currently loaded page. Furthermore, the WebEngine gives full access to the Document Model (DOM). The DOM can be accessed using Java DOM core classes and allows the manipulation of the DOM programmatically. 
+
+Hence Java and JavaScript have a totally different type system, there needs to be a type conversion when exchanging data between Java and JavaScript. \todo{add ref live connect} gives an detailed explanation of the conversion rules. Hence this conversion for simple types is rather obvious, the important part to mention is that JavaScript objects, that can not be easily transferred into simple Java types are wrapped as an instance of the JSObject class. The same conversion is used if the result of the executed JavaScript code is a DOM node.
+
+Although this part of the communication is really important, also the second direction, making upcalls from the JavaScript code to JavaFX, is required. The general concept there, is to create and register an bridge object, which can be an arbitrary Java Object. In a second step, it is necessary to make this bridge object known to the JavaScript context by calling setMember method on a JSObject. Subsequent, it is possible to access any public fields and methods of the Java object in the JavaScript context. Since the bridge object is registered to a JSObject, it is possible to attach the bridge object to any (complex) JavaScript object or DOM node. Also for this direction a type conversion is needed and behaves in the inverse way when converting from JavaScript to Java types.
+
+In fact the bridge object can be registered at a DOM node or a JavaScript object, it is necessary to establish a common interface on which the brigde object always is registered to allows a unfied usage within the web application context. Furthermore this interface needs to offer the possibility to inject data. This is necessary in fact the selected catalogue object also gets injected from the navigator into the editor. Just if this has happened, it is possible to forward this data to the web application.
+
+Since it is necessary to regard the usage of the web application also without the navigator this  behaviour needs to be abstracted from the application itself. This is reached by introducing a new layer, called cidsJS. Figure gives an overview of the architectural design. The web application shall only communicate with this additional layer. As depicted in figure \ref{fig:cidsJS} the cidsJS layer needs to define fix interfaces for both sides, the client side, and the backend side, since especially the navigator needs to inject data into the application context and needs to register a bridge object for data exchange. 
+
+\begin{figure}
+	\centering	\includegraphics[width=1.0\textwidth]{./img/impl/cidsJS.png}
+	\caption{Architectural Overview CidsJS}
+	\label{fig:cidsJS}
+\end{figure}
+
+%Seperating the communication of the web application and the navigator with an additional layer hides the context the application hosted in, for example the cids Navigator, from the application itself and eases the usage in other contexts. Therefore cidsJS, allows the usage of several backend implementations and forwards the requests of the web application to the currently used backend.The second important part of the cidsJS layer is responsible to define a fix place where the bridge object that allows the communication between Java and JavaScript can be registered and offers an interface that allows to inject vital data to the web application, like the cidsBean and if the application acts as editor or renderer.
+
+The first thing that is implemented is the injection of the cidsBean which represents the selected catalogue object. For this cidsJS is extended with a respective method called injectCidsBean. When the setCidsBean method of the HtmlWidgetEditor is called, the injectCidsBean method can be used to provide the web application context with the necessary data. This requires that the cidsJS layer is represented as a object that can be easily accessed within the whole JavaScript context of the loaded page and thereby easily accessible within the Java scope. In JavaScript a very common practice for this is to use an anonymous function that handles the initialisation of the cidsJS object and finally exposes this object to the global scope of the application afterwards. Including the JavaScript file with a script tag in the index file of the application is sufficent to use cidsJS. Following this approach it is very easy to get a reference of the cidsJS object in Java by executing a script that just needs to access the global object, cidsJS is exposed to. Listing \todo{add ref} demonstrates the code for injecting the cidsBean into cidsJS. The same approach can be used for setting the isRenderer property that indicates if the application shall be used in render or editor mode.
+
+\begin{lstlisting}[label=implicit_exit][caption=Injecting the cidsBean to the JavaScript application]
+JSObject cidsJs = (JSObject)webEng.executeScript("ci");
+
+ cidsJs.call("injectCidsBean",
+              CidsBean.getCidsBeanObjectMapper().writeValueAsString(bean));
+\end{lstlisting}
+
+Injecting the cidsBean into the JavaScript context is only a part of the solution. The application controller needs also to be adopted to the new situation. The main idea is to extend cidsJS with a method getCidsBean. Hence there is no guaranteed order that the controller of the angular application is executed after the cidsBean was injected into cidsJS, the initialisation of the controller needs to be delayed. Therefore the getCidsBean method returns a promise object. Promises are a very common concpet in JavaScript to handle asynchronous events. A promise is an object that represents the result of an action that is performed asynchronously and may or may not finish at any given point in time. Angular already provides a promise implementation that allows to register so called callback-functions for different cases. Callback functions can be registered for the case the result is available or a failure has happened. The \$http service, that was used to load relevant data from file so far, also uses Angular’s promise implementation. Angular uses a so called defer object, that can be used to programmatically reject or resolve a promise which will execute the registered callback functions for that case. In our case this defer object is initialized during the initialisation of cidsJS and resolved when the injectCidsBean method is called.\todo{figure navigator with web app}
+
+The current state would fully support the integration of the demo application as renderer. However, using the demo application as editor is still not possible in fact the changed data within the demo web application can not be send back to the navigator. The NavigatorAttributeEditorGUI offers buttons for saving and discarding changes that were made to the cidsBean object. If the cidsBean was not changed during the editor was opened, the buttons close the editor component. In the case the object was changed, a dialog that calls on the user to confirm the action is shown. The cidsBean itself provides two different flags, that indicate if the cidsBean was changed. The first is set automatically if a property of the cidsBean was changed. The cidsBean therefore implements a PropertyChangeListener which allows to listen on every property change. The second flag can be used to artificially mark the cidsBean as changed. The problem when using a web application as editor,is that save and discard actions are initiated by the user and within the context of the navigator. At this point the information if the cidsBean was changed needs to be already available. Therefore, a first solution to use the artificial change flag can not be used in fact this indicates the bean always as changed and modifies the behaviour described above. 
+
+In contrast to the first approach the only possible way to ensure the same application logic is to notify the navigator about every change of the cidsBean. Hence this is only necessary when the application is used within the navigator, the cidsJS layer is extended with the respective functionality. When the injectCidsBean method in cidsJS is called, cidsJS registers listener on the properties of the cidsBean object. Again Angular already provides a corresponding feature. The \$watch and \$watchCollection method of an scope object can be used to register a listener callback that is executed whenever the watch expression changes. The watch expression represents the value that will be watched which in our case is the value of each property of the cidsBean. The listener callback of a registered  \$watch then needs to notify the backend about that change. For this, the backend interface and the Java bridge object that allows upcalls from JavaScript to Java is extended with a respective method. To reflect the changes back into the cidsBean instance of the HtmlWidgetEditor, the bridge object also implements the Observeable interface. 
+
+First tests with the above mentioned implementation reveal that the numerous watches for every property on the cidsBean slow down the performance of the web application.
+The reason for this lies in the architecture of angular. 
+The watch expressions are checked every time a property on the corresponding scope has changed. 
+Hence the demo application mainly consists of one scope, all watch expressions are checked every time angular checks the scope for changes. 
+Hence the main reason of the watches are to indicate that the data has changed, the watches are only needed until the first change in the data has happened. 
+After that point the listener mechanism is no longer needed. 
+The \$watch function returns a de-registration function that disables the listener mechanism for that watch-expression.
+During the creation of the watch-expressions the de-register functions are saved in an array. The listener callback function uses the bridge object to indicate that the bean has changed and iterates through this array and executes all de-register functions to turn off the listener mechanism. 
+Hence the data changes are no longer submitted to the HTMLWidgetEditor the artificial change flag of the cidsBean is set when the data has changed. 
+Furthermore it is necessary to retrieve the data from the web application in case the user wants to save the changes. 
+The Navigator already provides an interface EditorSaveListener that offers an Editor to execute some code before the data is persisted. 
+By implementing this interface in the HTMLWidgetEditor, it is possible to retrieve the latest state of the cidsBean with the changes that were made. Hence the NavigatorAttributeEditorGUI uses its own reference of the cidsBean it is not possible to assign a new object to the cidsBean field of the HtmlWidgetEditor hence the reference of the NavigatorAttributeEditorGUI points still to the old cidsBean reference. Because it is not clear what properties of the cidsbean have changed, the CidsBean class was extended with a method bulkUpdate(CidsBean otherBean) that updates the properties of a cidsBean according to an other instance of a cidsBean. 
+ 
+\section{Testing & Problems}
+
+
+
+=> look of select elements in the web view
+
+=> flickr effect on loading (CountDownlatch...) / showing wait symbol until the anuglar app is completely initialised
+
+=> blurred and fuzzy look of web applications...
+
+
+

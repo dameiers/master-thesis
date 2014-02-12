@@ -1,0 +1,90 @@
+%
+%	Preamble of Master Thesis 
+%	TODO adaption to cismet layout
+%
+%	KOMA-Script Dokumentklasse "scrbook"
+
+% prints warnings about obsolete syntax and syntax which will probably break
+\RequirePackage[l2tabu, orthodox]{nag}
+
+\documentclass[12pt, pdftex, a4paper, bibliography=totoc, listof=totoc, parskip=half, abstract=on]{scrreprt}
+
+% use T1 Fonts
+% The Latin Modern fonts are enhanced versions of the Computer Modern fonts. They have enhanced metrics and glyph coverage.
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+
+% use utf8 as encoding
+\usepackage[utf8]{inputenc}
+
+% Language configuration
+% quotes
+\usepackage{csquotes}
+
+% comment out, which is not needed
+\usepackage[english]{babel}
+%\usepackage[ngerman]{babel}
+
+% mathematical symbols
+\usepackage{amssymb}
+
+%%%% === Verzeichnisse (TOC, LOF, LOT, BIB) ===
+   %liststotoc,      % Tabellen & Abbildungsverzeichnis ins TOC
+   %idxtotoc,        % Index ins TOC
+   %bibtotoc,         % Bibliographie ins TOC
+   %bibtotocnumbered, % Bibliographie im TOC nummeriert
+   %liststotocnumbered, % Alle Verzeichnisse im TOC nummeriert 
+
+\input{preamble/moreColor}
+
+\input{preamble/moreArray}
+
+\input{preamble/moreFormat}
+
+% url – Ver­ba­tim with URL-sen­si­tive line breaks
+\usepackage{url}
+
+%PDF Version 1.6
+\pdfminorversion=6
+
+% for inserting graphics
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+
+% for inserting graphics as background picture
+\usepackage{eso-pic}
+
+\usepackage{tocbasic}
+
+\input{preamble/moreBibliography}
+
+\input{preamble/moreListings}
+
+%-----------------------------------------------
+
+\input{preamble/newCommands}
+
+\input{preamble/moreAbbreviations}
+
+% hyperref should be one of the last imported packages
+% although there are exceptions: http://tex.stackexchange.com/questions/1863/which-packages-should-be-loaded-after-hyperref-instead-of-before
+\input{preamble/moreHyperref}
+
+\input{preamble/moreTable}
+%random stuff
+
+% prints the Euro sign
+% \euro generates the symbol. 
+% \EUR{x} shows an amount with the symbol and has the correct unbreakable thin space in between.
+% http://www.theiling.de/eurosym.html
+%\usepackage{eurosym}
+
+%----------------------------------
+%----------------------------------
+%----------------------------------
+
+
+%
+%	EOF
+%

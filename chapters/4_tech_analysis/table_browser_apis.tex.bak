@@ -1,0 +1,26 @@
+\setlength\LTleft{0pt}
+\setlength\LTright{0pt}
+\begin{landscape}
+ \label{tab:req_browser_comp}
+	\begin{tabular}{| p{5cm} | >{\centering\arraybackslash}m{1.5cm} | >{\centering\arraybackslash}m{4cm} | >{\centering\arraybackslash}m{1,8cm} |>{\centering\arraybackslash}m{2cm} | >{\centering\arraybackslash}m{4cm} |}
+	\hline
+	\rowcolor{gray}
+		& \head{Calpa HTML} & \head{Flying Saucer} & \head{Lobo Project}	& \head{WebRenderer}	& \head{JavaFX WebView} \tabularnewline
+	\hline
+		Java Script Support	& \cellcolor{LightRed}no	 &\cellcolor{LightRed} no & yes & yes & yes\\ 
+	\hline
+	Access to loaded Web page &\cellcolor{LightRed} no &\cellcolor{LightRed} no &\cellcolor{LightRed} no & yes & yes \\ 
+	\hline
+	HTML5 Support & \cellcolor{LightRed}no & not clear & \cellcolor{LightRed}no & yes but uncertain extent & yes  \\ 
+	\hline
+	CSS3 Support	& \cellcolor{LightRed}no & small handful &\cellcolor{LightRed} no & \cellcolor{LightRed}no  & yes \\ 
+	\hline
+	License	& LGPL & LGPL & GPL & \cellcolor{LightRed}commercial & proprietary / GPL \\ 
+	\hline
+	Documentation & not found & good, How-To articles, Developer Guide, Examples & just a few tutorials & & good, many and detailed examples, 	and how-To articles\\ 
+	\hline
+	Support, Community & project abandoned & rapid decrease in activity & sparsely used forum & commercial support & goods, many forums, large community \\ 
+	\hline
+	\end{tabular}
+\captionof{table}{Decision Matrix Java Browser Components}
+\end{landscape}

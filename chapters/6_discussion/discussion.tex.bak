@@ -1,0 +1,63 @@
+\chapter{Discussion}
+
+\section{Conclusion}
+
+The navigator is successfully extended with the ability to integrate arbitrary web applications, which is one of the main objectives of the presented work. 
+Withal, the degree how seamless an web application is integrated, is very scalable and reaches from the simple display of web applications to highly integrated componets, that interact with the already existing Swing based navigator GUI and behave like already existing Swing renderer. 
+This scalability ensures that the kind of web application that can be integrated is not restricted.
+
+The implemented approach allows a very easy configuration to indicate when a web application shall be used as renderer and editor. 
+Using the already existing class attributes it is possible to gain from the already existing support in the cids management tools. 
+Hence the configuration is based on cids classes, it is possible to easily mix the usage of swing and web based renderer in one application.
+
+Another beneficial side effect, is the introduction of the new JavaFX WebView as additional and optional browser API for description pages that offer additional information for a catalogue node.
+Hence the JavaFX is much more feature rich than the two browser API's that can be used up to now, totally new possibilities in the design of description pages are available now. 
+An important key factor of the implementation is that the usage of the JavaFX WebView as browser for description pages is easily configurable with a new property in the navigators configuration file and is fully backward compatible. 
+This is especially important because it can not be guaranteed that JavaFX is available on every client.
+
+The developed web based survey plan demo application proves that a seamless integration of web applications can be reached. 
+Important to note is that the developed application can be used in two different modes, an editor and a renderer mode. 
+This bisects the development and maintenance efforts.
+With the implemented abstraction of the back-end from the application itself, it is possible to conduct the demo application also in other environments, for example a normal web server. Thereby, just a minimum amount of adoptions are necessary to get the application to work, which was another objective defined in chapter \ref{chap:intro-objectives}.
+
+The implementation of the survey plan demo application and the integration into the cids navigator is preceded by an exhaustive examination of modern web development technologies with a special focus on JavaScript MVC frameworks, which are one of the latest trends in web development. 
+The focus on these frameworks is explained by two different factors. 
+The first one is, that those frameworks fit most conceptually into the cids architecture, hence all server side backend is already implemented or will be in the new RESTful server API. 
+The second one and more important one is, that building feature rich and highly interactive web applications always require the usage of HTML, CSS and, first and foremost, JavaScript. 
+Alternative technologies suffer from the easy and lightweight accessibility that web applications normally have since they are plugin based and can be regarded as deprecated technologies. 
+In particular, the comparison of the MVC frameworks has revealed a very promising and powerful candidate, AngularJS. 
+Again the development of the survey plan demo application has shown how easy web based renderer components can be implemented using AngularJS.  
+
+\newpage
+
+\section{Future Work}
+
+Even if the reached state of the presented work is rather complete and quite useful, there are still some open issues and improvements that shall be solved in future work. 
+The most obvious one is to implement the missing features in the survey plan renderer. 
+To fully replace the existing Swing based renderer it is necessary to extend it with a zoom- an pan-able visualisation of the historic survey plan documents. 
+Additionally, it must be possible to add land parcels to a survey plan. 
+In the swing version, a dialog that supports the user choosing a land parcel exists. 
+A similar functionality is also needed in the html version.
+
+Another important issue that was not regarded in the implementation is to extend the survey plan application, to use different styles, depending on the context it is nested in.
+Within the navigator the design that emulates the Swing renderer is sensible. 
+However, when the application is used standalone in a web browser or is used in an other context, a design more suitable to web pages is preferred. 
+That this is possible in general shows the trend of responsive web design, which adopts the layout of the web application to the size of the device it is used. 
+A possible approach to implement this, is to use browser sniffing which allows to react on the browser that is used.
+
+Besides the open extensions of the demo application, there are as well some minor issues with the JavaFX WebView itself. 
+The first one is that the visualisation of web applications in the WebView is slightly blurry and has not a good quality like other browsers. 
+Unfortunately no solution or possible workaround can be found at present. There is an reasonable expectation that this problem is solved automatically with the next major release of the Java runtime environment version 8 since the official oracle roadmap points out enhancements of the WebView for that release. 
+Possibly, the current workaround that styles the options list of select elements is no longer needed in that version and it is possible to define the style in the CSS context of the web application.
+   
+Regarding the bi-directional data exchange of the navigator and integrated web applications, it is clear that there is also open work to do. 
+As outlined, the interface is based on the RESTful cids server API, but not fully implemented. 
+There is also the chance to create a \enquote{cids-legacy implementation} of this API, that only implements a subset of the cids REST API. 
+This implementation can use already existing cids server functionality, but is accessed as RESTful API, which offers the chance to already develop complex web applications based on cids. 
+The legacy implementation can be swapped with the final REST API later on, without changing the web applications.
+
+From a more strategical point of view, the most important future work is to expedite the development of the new cids REST API. 
+In strong relationship with that, it is important to develop first complex web application that make use of the new API. 
+A possible and promising approach is to develop an application that emulates basic features of the already existing navigator, like the catalogue and rendering / editor mechanism. 
+Such an application would be an ideal supplement of the cids platform and presented work.
+ 

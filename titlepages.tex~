@@ -1,0 +1,93 @@
+
+\newcommand\BackgroundPic{%
+\put(0,0){%
+\parbox[b][40mm]{\paperwidth}{%
+
+\includegraphics[width=40 mm%
+]{img/noise_tiled}%
+
+}}}
+
+\begin{titlepage}
+\newgeometry{left=35mm,right=15mm,%
+bottom=15mm,top=25mm,bindingoffset=5mm,%
+includehead,includefoot
+}
+\AddToShipoutPicture*{\BackgroundPic}
+\hfill
+\begin{minipage}[t]{0.5\textwidth}
+	\begin{flushright}
+	\includegraphics[width=\textwidth]{img/logo_cismet_grey}
+	\end{flushright}
+\end{minipage}
+~\\[1cm]
+\includegraphics[width=0.6\textwidth]{img/puzzleGrey}
+~\\[1cm]
+
+\begin{flushright}
+\textsc{\Large Master Thesis Thema}
+
+\vfill
+
+\textsc{cismet GmbH}
+\\[0.5cm]
+\textsc{IT Park Saarland}\\
+\textsc{Altenkesseler Straße 17 D2}\\
+\textsc{66115 Saarbrücken}\\
+\end{flushright}
+
+
+\end{titlepage}
+\restoregeometry
+
+\begin{titlepage}
+\begin{center}
+
+% Upper part of the page. The '~' is needed because \\
+% only works if a paragraph has started.
+\begin{minipage}[t]{0.4\textwidth}
+	\begin{flushleft}
+	\includegraphics[width=\textwidth]{img/logo_htw_saar}
+	\end{flushleft}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.4\textwidth}
+	\begin{flushright}
+	\includegraphics[width=\textwidth]{img/logo_cismet_grey}
+	\end{flushright}
+\end{minipage}
+
+
+
+~\\[1cm]
+
+\textsc{\LARGE Master Thesis}\\
+\textsc{\large im Studiengang Praktische Informatik}\\[1.5cm]
+% Title
+%\HRule
+\hspace{0.4cm}
+{ \huge \bfseries Master Thesis Thema \\[0.4cm] }
+
+%\HRule 
+\hspace{1.5cm}
+
+\textsc{\large Daniel Meiers}\\[0.2cm]
+\textsc{\large Matriculation No.: 3538990}\\[0.2cm]
+\textsc{\large daniel.meiers@cismet.de}\\[4cm]
+
+% Author and supervisor
+\begin{tabular}[0.8\textwidth]{l l}
+\emph{First Examiner:} & Prof. Dr. Ralf \textsc{Denzer} \\
+\emph{Second Examiner:} & Prof. Dr. Reiner \textsc{Güttler} \\
+\emph{Advisors:} & Martin \textsc{Scholl}, Dipl. Inf. (FH) \\
+ 				& Sascha \textsc{Schlobinski}, M.Sc.
+\end{tabular}
+
+
+\vfill
+
+% Bottom of the page
+{\large \today}
+
+\end{center}
+\end{titlepage}

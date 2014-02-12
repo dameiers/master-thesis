@@ -1,0 +1,135 @@
+\chapter{Technology Analysis}
+	
+\section{Choosing Java Browser Components}\label{chap:browser_api_comparison}
+There are already existing Java APIs that allows the visualisation of HTML applications in Java Swing components. They all offer the basic functionialty to parse HTML documents and visualise them in Swing components.
+
+The following APIs are examined with regard to their ability to visualize modern web applications, which means applications that highly make use of JavaScript, CSS3 and HTML 5 features. In particular the above introduced requirements for browser APIs are taken into consideration.
+
+In the current implementation of the cids navigator it is already possible to use simple HTML sites as a description page for catalogue nodes. It is possible to choose  between two different html rendering API's, Flying Saucer and Calpa HTML. They are examined first in regard to a possible reuse.  
+
+% Calpa HTML
+\textbf{CalpaHTML} was the first component used to visualise html documents as a description page for nodes in the cids catalogue. Dispairingly it seems that the project was abondend in fact that no further information (API Documentation, feature list etc) could be found. Thus, Flying Saucer was introduced as an optional HTML rendering component.
+%ToDo: Why was Flying Saucer introduced?
+
+% Flying Saucer
+
+\textbf{Flying Saucer} is an XHTML Renderer that allows the rendering of XML and XHTML documents to images, pdf documents as well as Swing components such as JPanels or ScrollPanes. The main idea of flying saucer is to parse any kind of XML documents and to apply CSS styles to them. According to the website, Flying Saucer supports nearly all CSS 2.1 with a few exceptions and additionally "includes a small handful of CSS 3 features" [quelle flying saucer website]. Unfortunately it is was not possible to determine which CSS3 Features are supported and which not in more detail. Documents parsed with FlyingSaucer need to be valid and standard compliant documents. It is not possible to parse faulty/legacy documents. The developers recommand the usage of an HTML cleaner like TagSoup or JTidy, which are able to make invalid HTML documents valid. The documentation of Flying Saucer is good. There are several How-To articles as well as an developer guide that makes it easy to use Flying Saucer. Furthermore there is an mailing list where it is possible to get support from the developers and the community. Unfortunatly, there is a rapid decrease in the activtiy of the mailing group since 2010. The most disqualifiying factor is that FlyingSaucer lacks in supporting JavaScript or any kind of user editable content, since the parsed documents are read only. 
+
+
+% the Lobo Project
+
+The \textbf{Lobo Project} offers a complete stand alone Java based web browser as an alternative to other mdoern browsers. It consists of the Cobra toolkit which is responsible for HTML parsing and rendering on the one side and a browser application on the other side. The devlopers emphasize that the Lobo browser is an "[...]  browser application that has been documented so it can be used as an API." and that sits on top of the Cobra toolkit. It enriches its users with additional functionality such as navigation, request handling, authentication, caching and so on. The Cobra HTML renderer and parser fully supports HTML 4, Javascript and CSS 2. HTML5 features and CSS3 are not supported. Both projects are available under a LGPLv2 license. The API is well documented, but there are only a few tutorials and how-to documents which makes it a bit harder to start. This is especially true for the Cobra toolkit. There is a help forum available but sparsely used and maintained, hence there are a lot of unanswered questions. This and the fact that the last release was in 2009 indicates that the project is shelved. 
+
+% WebRenderer
+
+Another full swing and embedded browser component is \textbf{WebRenderer}. It is built upon the Mozilla technology and therfore supports an impressive list of standards and features such as many HTML5 features, CSS1 and 2, JavaScript, Java Applets, SVG and MathML just to name a few. Another outstanding point in contrast to the earlier discussed frameworks is the fine granular control over the loaded web page. WebRenderer gives full access to the DOM of the loaded site and offers a full event model which allows it to react on mouse events, browser events, network events and DOM events. The API is well documented and there are a lot of code Examples as well as an developer guide. The drawbacks of WebRenderer are a missing CSS3 support and, the more serious issue, the license. WebRenderer is commercial product and can therefore not be used.
+
+
+% Java FX WebView
+
+%ToDO: explain what is JavaFX...
+In \textbf{JavaFX} there is a built in browser component called WebView, that is based on WebKit an open source browser engine, which is also used in modern browsers like Safari. Similiar to WebRenderer there is also a high support of modern web standards. To give an example, WebView supports the following HTML5 features: Canvas, MediaPlayback, form controls, editable content and so on. Furhermore it supports JavaScript and several CSS 3 features. It also offers a bidirectional communication between JavaScript code of the loaded site and JavaFX. Hence WebView is a native JavaFX component, the documenation as well as the support are very good and it is no problem to find information or get help on a special problem. The JavaFX community is large and growing, and there are several forums, among others the Oracle JavaFX forum. Since Java 7, JavaFX is part of the standard Java runtime environmet and hence available platform indepent. In contrast to the Lobo project or CalpaHtml, it is unlikely that the support of the WebView component gets discontinued.
+
+All this make the JavaFX WebView to the best suiting candidate, it supports an extended set of HTML5 features, JavaScript and CSS, is available as open source and is well documented with a large and actice community. But the usage of JavaFX emerges the problem to integrate JavaFX components in the cids Navigator respectivly swing components. Fortuneately JavaFX also provides a component for this task. The JFXPanel is a Swing component that acts as a JavaFX runtime container and makes it possible to run arbitrary JavaFX application scenes in it.  
+
+The following evaluation matrix summarises the pros and cons of the above introduced Browser components and APIs.
+
+\input{chapters/4_tech_analysis/table_browser_apis}
+
+\subsection{testing and comparing the choosen browser component}\label{chap:browser_api_testing}
+
+Despite an exhaustive literature research it was not possible to find a full feature list of the WebView concerning modern web standards like CSS3, JavaScript or HTML5. To ensure that the WebView is able to render modern web applications, especially JavaScript based SPA, correctly, it is necessary to test the compliance to web standards and the behaviour when trying to visualise JavaScript SPA. This is done with several web based test tools that are available. The following section carries out what test tools are used, gives an short description about each test tool and shows the result of the WebView as wells as the result of the Google Chrome Web Browser to allow a first comparison. 
+
+% acid test -> good overview: "Acid3 is primarily testing specifications for “Web 2.0″ dynamic Web applications. Also there are some visual rendering tests, including webfonts." The list of standards tested can be found at: http://www.webstandards.org/action/acid3/
+
+The first test that is executed is the ACID 3 test originated in 2008. The test is defined by the Web Standards Project and can be found at [acid 3 test]. According to [acid 3 page] the test "[...] is primarily testing specifications for ''Web 2.0'' dynamic Web applications" A full list of tested standards can be found at [acid 3 page] but among others the CSS3 Color, CSS3 UI, SVG and a lot of DOM standards are tested. Important to note is, that the resulting image is not the only criteria to pass the test. Also the animation has to be smooth. As figure \ref{fig:acid_webview} depicts, the test is not fully passed. Unfortunately the test give no information what test has failed or what standard the browser is not compliant to. Besides this obvious failure, the animation smoothness compared to other Browsers, especially compared to Google Chrome, is considerably worse. 
+
+
+\begin{figure}
+\begin{minipage}[t]{7cm}
+	\centering
+	\includegraphics[width=7cm]{./img/acid_result_webView.png}
+	\caption{Result Image of the Acid Test - WebView Browser}
+	\label{fig:acid_webview}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{7cm}
+	\centering
+	\includegraphics[width=7cm]{./img/acid_reference.png}
+	\caption{Reference Image of the Acid Test}
+	\label{fig:acid_reference}
+\end{minipage}
+\end{figure}
+
+
+Another important thing to mention is, that it is recommanded to exectue the with default settings hence e.g changing the zoomlevel "[...] may alter the rendition of the test page without this constituting a failure in compliance.". In fact the WebView is just embedded in the ensemble Application it is unclear if the layouting mechanism used in JavaFX influences the test results.
+
+
+
+%HTML5 test 
+
+To test the abilities of the WebView regarding HTML5 support, the HTML5 test [www.html5.test] is executed. The test is seperated in different features that are part of the upcoming HTML5 standards as well as drafts and specifications. It tests how many of these features are already supported and calculates a score. Important to note is that the feature set that is tested is not complete and that the test nor does it check the correctness of the implementation. As already mentioned, a lot of the HTML5 standards are still under development and could change before receiving a final status. Thus, the rather poor result (see \ref{fig:html5_webview}) can be relativated a bit.
+\begin{figure}
+\begin{minipage}[t]{7cm}
+	\centering
+	\includegraphics[width=7cm]{./img/html5_result_webview.png}
+	\caption{Result Image of the Acid Test - WebView Browser}
+	\label{fig:html5_webview}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{7cm}
+	\centering
+	\includegraphics[width=7cm]{./img/html5_result_chrome.png}
+	\caption{Reference Image of the Acid Test}
+	\label{fig:html5_chrome}
+\end{minipage}
+\end{figure}
+
+% CSS3 test
+
+As already mentioned in the requirements, it is vital that the browser supports as much CSS 3 features as possible. Hence it is not possible to find information regarding the CSS3 compatibility of the WebView, the CSS3 [www.css3test.com] is used to get a better insight on this issue. Similar to the HTML5 test, the test is dividied into the different modules defined by the CSS3 standard. Again, the test checks onyl the support of the various features rather the correct implementation. Figure \ref{fig:css3_webview} depicts the result of test. In this case, the result of the WebView is comparable with the result of Google Chrome (see figure \ref{fig:css3_chrome}). The reason for the general poor results might be that the CSS standard is still under development.
+
+\begin{figure}
+\begin{minipage}[t]{7cm}
+	\centering
+	\includegraphics[width=4cm]{./img/css3_webview.png}
+	\caption{Result Image of the Acid Test - WebView Browser}
+	\label{fig:css3_webview}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{7cm}
+	\centering
+	\includegraphics[width=4cm]{./img/css3_chrome.png}
+	\caption{Reference Image of the Acid Test}
+	\label{fig:css3_chrome}
+\end{minipage}
+\end{figure}
+
+
+%JavaSCript -> ECMA 262 Test Suite:
+%Wikipedia: Test262 is an ECMAScript conformance test suite that can be used to check how closely a JavaScript implementation follows the ECMAScript 5th Edition Specification. The test suite contains thousands of individual tests, each of which tests some specific requirements of the ECMAScript specification.
+
+The last thing to test are the JavaScript abilities. The ECMA International organisation, which is responsible for the standardisation of the ECMAScript language (the official name of JavaScript) provides the Test262 test suite "[..]that can be used to check how closely a JavaScript implementation follows the ECMAScript 5th Edition Specification" [quelle wikipedia]. It provides thousands of tests "[...]each of which tests some specific requirements of the ECMAScript Language Specification.". Although the suite consist of a huge amount of test cases, the authors emphasise that "test262 is not yet complete. It is still undergoing active development." [http://test262.ecmascript.org/]. In contrast to the above mentioned tests, the ECMA test262 suite lists every single failed test and offers additional information to this test case. Thus, it provides a good documentation of the bugs that are shipped with the tested JavaScript environment. Regarding the test result of the WebView, there are 236 test cases that fails. Although this seems to be a large number, the percentual stake of failed tests is about 2\%, which is a good result.
+   
+\begin{figure}
+\begin{minipage}[t]{7cm}
+	\centering
+	\includegraphics[width=7cm]{./img/ecma_result_webview_small.png}
+	\caption{Result Image of the Acid Test - WebView Browser}
+	\label{fig:ecma_webview}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{6cm}
+	\centering
+	\includegraphics[width=6cm]{./img/ecma_result_chrome_small.png}
+	\caption{Reference Image of the Acid Test}
+	\label{fig:ecma_chrome}
+\end{minipage}
+\end{figure}
+
+% ToDo give a shor discussion on the test results. What could be a problem? 
+
+The following table lists the test results for the above mentioned test suites for the JavaFX WebView and different modern web browsers to allow an comparison an classification of the standard compliance for the JavaFX WebView.
+
+\input{chapters/4_tech_analysis/table_browser_tests}
+
