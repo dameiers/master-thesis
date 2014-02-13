@@ -30,3 +30,8 @@
 *.vrb
 *.xdy
 *.tdo
+*.bak
+*.*~
+*.bib
+*.bcf
+*.xml
