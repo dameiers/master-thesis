@@ -2,11 +2,13 @@
 After the analysis of the state of the art in web front end development in general and JavaScript MVC frameworks in particular, this chapter outlines a conceptual approach how new web renderer components can be realized and can be integrated in the cids system, or more precisely, in the cids navigator.
 
 As already mentioned it is obviously necessary that a swing browser component is needed for visualising arbitrary web applications in the navigator swing GUI.
-Hence an own implementation would be totally out of the scope if this work, it is necessary to search and examine respective third party components.
+\todo{swing ist ein Name deshalb im ganzen Dokument gross schreiben.}
+Hence an own implementation would be totally out of the scope if \todo{for} this work,\todo{Satzende. Weiter mit Therefore o.ä.} it is necessary to search and examine respective third party components.
 This chapter lists and explains requirements for candidate components and API's.
+\todo{APIs (glaube hatte ich bereits erwähnt)}
 Based on these these requirements the examination of the various candidates is done in chapter \ref{chap:browser_api_comparison}.
 
-Hence another objective of this work is to evaluate a modern JavaScript APIs for a company wide use in general and for the development of an demo web application in special, this chapter also outlines requirements that can be used for the evaluation in chapter \ref{chap:detail_comparison}.
+Hence another objective of this work is to evaluate a modern JavaScript APIs \todo{Einzahl} for a company wide use in general and for the development of a demo web application in special, this chapter also outlines requirements that can be used for the evaluation in chapter \ref{chap:detail_comparison}. \todo{evt. mehrere sätze draus machen.}
 
 \section{Overview}
 
@@ -18,7 +20,7 @@ The catalogue tree offers a uniform and user specific tree view of the integrate
 The tree is used \enquote{for navigation of the distributed catalogue and provides basic information about objects} \autocite{cismet-cids-readMe}.
 For every node in the catalogue tree, it is possible to offer more specific information to the node.
 Those information are visualised in another part of the navigator called the description pane.
-Figure \ref{fig:desc_panes} depicts an example catalogue with various contents of the description panes can have.
+Figure \ref{fig:desc_panes} depicts an example catalogue with various contents of the description panes can have. \todo{Satzbau oder? das can have stört mich}
 
 \begin{figure}
 	\centering \includegraphics[width=1.0\textwidth]{./img/conception/desc_panes.png}
@@ -31,39 +33,39 @@ The kind of the renderer that is used, is determined on a per-class basis.
 The renderer only allows the visualisation of information, for editing those information cids editors are used.
 They follow the same principles as cids renderer but are placed in another panel within the cids navigator.
 
-Regarding this basic setup it is clear that if we want to use  web application as cids renderer, they need to follow the same per-class approach like the existing one.
+Regarding this basic setup it is clear that if we want to use  web application \todo{plural?} as cids renderer, they need to follow the same per-class approach like the existing one.
 This means that the web application itself must be parametrized with the information which concrete object is currently selected in the navigator and then needs to visualise the information for that object.
 For web editor components, it is also necessary to provide the edited information in a way that the navigator can access them.
 
 This interaction with the web application is quite essential hence only in that way a seamless integration of the web application into the navigator GUI can be reached.
 Although a possibly seamless integration of the web application is worthwhile, this always requires specific adoptions to the web application to make the interaction possible.
-But it is also a quite imaginable and reasonable scenario to integrate legacy applications where such an seamless integration can not be afforded.
+But it is also a quite imaginable and reasonable scenario to integrate legacy applications where such a seamless integration can not be afforded.
 For example it is imaginable to use a legacy web based information system as per-class renderer and editor.
 In that scenario no data exchange between the web application and the navigator is necessary in fact the web application itself takes care about all objects.
 Therefore, the technical realisation should not limit the kind of web application that can be integrated, if possible.
 
 Nonetheless, the implementation should focus a possibly seamless integration.
-The following consideration try to outline possible ways that achieve this.
+The following consideration \todo{plural} try to outline possible ways that achieve this.
 For the data exchange between the navigator and the web application different approaches are available.
-We can distinct the approaches according to initiator of the data exchange.
+We can distinct the approaches according to \todo{the} initiator of the data exchange.
 
 It is conceivable that the loaded web application tries to fetch the currently selected object from the navigator.
-The problem with that approach is the web application does not know when the user has selected catalogue node, in fact this happens out of its context. Furthermore, the current implementation provides that the cidsBean is injected into the renderer and editors. Following this approach would stand in contrast with the current implementation and causes more efforts to implement.
+The problem with that approach is \todo{that - aber dann gibt es 2 mal that hintereinander} the web application does not know when the user has selected \todo{a} catalogue node, in fact this happens out of its context. Furthermore, the current implementation provides that the cidsBean is injected into the renderer and editors. Following this approach would stand in contrast with the current implementation and causes more efforts to implement.
 
-The opposite is, that the navigator ships the information to web application.
+The opposite is, that the navigator ships the information to \todo{the} web application.
 This would avoid the above mentioned drawbacks and would better reflect the current implementation moreover.
 As mentioned above, if a object node gets selected, the navigator loads the corresponding renderer component and injects the currently selected object into it.
-Transferring the same approach to web applications would therefore cause less implementation changes.
+Transferring the same approach to \todo{the} web applications would therefore cause less implementation changes.
 The question is how can the Java based navigator inject data into the web application? 
 
 One solution is to parametrize the URL that is used to retrieve the web application with the relevant information.
 Using this approach requires that the web application is hosted by a web server, which is not necessary in every case.
 If the web application doesn't need any server side processing it is also possible that the web application can be packed in one of the jar files necessary to run the navigator application.
-Furthermore additional logic on server side is required to process the URL encoded data.
+Furthermore additional logic on \todo{the} server side is required to process the URL encoded data.
 Much more critical is, that the relevant information of the selected navigator object needs to be encoded into URL.
 This encoding has some limitations.
 First, it is not possible to encode binary data for example.
-This can not be excluded hence in WuNDa for example already renderer exists that also need to visualise binary data like pdf documents or images.
+This can not be excluded hence in WuNDa for example already renderer exists that also need to visualise binary data like pdf documents or images. \todo{der Satz gefällt mir nicht.} 
 Another problem is that the information that needs to be encoded can be very large and can have a complex structure.
 Although the RFC \autocite{conception:rfc-uri}  does not limit the length of an URL, there are practical limitations depending on the browser and web server used (cf. \autocite{conception:uri-length}).
 Additionally, using this approach would also complicates the reuse in other contexts.
@@ -71,25 +73,25 @@ Additionally, using this approach would also complicates the reuse in other cont
 The second option is, that the navigator injects the selected option on client side, when the application gets loaded.
 This requires, that the navigator must be able to execute JavaScript code within the context of the web renderer component and that the web application can make method calls to Java.
 Fortunately both ways are possible with the Java Scripting API \autocite{conception:rhino}.
-The problem is, that the web application shall be rendered by an third party component.
+The problem is, that the web application shall be rendered by a third party component.
 Using this approach requires that the Java browser component offers an interface for communicating with the JavaScript environment of the loaded web application and vice versa.
 
 Web renderer components that shall be integrated in the navigator can be wrapped with some JavaScript logic that retrieves the data that should be displayed.
 This simplifies the reuse in any other web application hence only this part of the application needs to be re-factored.
 	
-Another basic advantage of using web applications as cids renderer is that they can be reused when building web based information systems that make use of cids features and the new cids REST API.
+Another basic advantage of using web applications as cids renderer is that they can be reused when building web based information systems that make use of cids features and the new cids REST API. \todo{Wurde die bereits vorher erwähnt?}
 Therefore, it shall be possible to reuse the developed web applications with at least efforts as possible.
 
-Last but not least, the effort for the configuration which objects should use an web application as cids renderer shall be as small as possible.
+Last but not least, the effort for the configuration which objects should use a web application as cids renderer shall be as small as possible.
 
 The following list summarizes the requirements for the technical realisation and the further considerations.
 
-\textbf{Requirements:}
+\textbf{Requirements:} \todo{Am anfang alles gross oder klein schreiben}
 \begin{enumerate}
-\item no limitation that restricts the kind of web application that is integrated ?
+\item no limitation that restricts the kind of web application that is integrated ? \todo{Warum Fragezeichen?}
 \item but integration must also be as seamless as possible 
 \item Data exchange between navigator and web application
-\item It should be possible to easily use the web application also without the navigato
+\item It should be possible to easily use the web application also without the navigator
 \item Only one code base for editor and renderer
 \item There should be an easy way to configure the usage of the web application
 %\item the location of the web app (ext web server, locally started webserver, in jar) 
@@ -98,7 +100,7 @@ The following list summarizes the requirements for the technical realisation and
 
 \section{Integration in cids}
 
-After giving an overview what the expected features of the new developed web renderer component are, and discussing some general and architectural approaches, this chapter outlines the integration in the cids navigator in a more detailed and technical manner.
+After giving an overview what the expected features of the new developed \todo{Das Ding wurde bereits entwickelt?} web renderer component are, and discussing some general and architectural approaches, this chapter outlines the integration in the cids navigator in a more detailed and technical manner.
 
 %configuration
 The first issue which needs to be clarified for integrating web applications as cids renderer into the navigator is, how the configuration can be modeled.
@@ -107,12 +109,12 @@ Furthermore the configuration needs to be done on a per class level.
 Especially the per class constraint offers the chance to use cids class attributes to easily solve this issue.
 Class attributes are part of the cids meta information system and provide a per class key-value store, which can be used to provide class wide settings.
 Using class attributes allows an easy implementation of the new feature.
-What is just necessary, is to define a new class attribute that indicates the usage of an web application as renderer and editor.
+What is just necessary, is to define a new class attribute that indicates the usage of a web application as renderer and editor.
 The generation of class attributes is already supported by the ABF managing tool.
 Hence, an uncomplicated and tool supported approach for the configuration is ensured.
 
 %where are web applications stored
-Now that the indication when to use a web application is clear, the next question to answer is how to point to the location of the web application and where the applications are stored. Therefore we have a closer look on the existing mechanism that cids already provides for determining what gets displayed in the description pane.
+Now that the indication when to use a web application is clear, the next question to answer is how to point to the location of the web application and where the applications are stored. Therefore we \todo{Den Leser direkt ansprechen. Ich mag das nicht. Ist bis jetzt auch das erste mal.} have a closer look on the existing mechanism that cids already provides for determining what gets displayed in the description pane.
 
 The information that gets displayed in the description pane depends on the type of the selected catalogue node and the options that are configured for it.
 There are two types of catalogue nodes, object and organisational nodes. Organisational nodes allow a categorisation of the existing objects nodes after arbitrary aspects.
@@ -126,11 +128,12 @@ The following example demonstrates this. If an object of the class \enquote{Verm
 
 from the package:  
 
-\indent \centerline{\framebox{\emph{$de.cismet.cids.custom.objectrenderer.wunda_blau$}}}
+\indent \centerline{\framebox{\emph{$de.cismet.cids.custom.objectrenderer.wunda\_blau$}}}
+\todo{Warum Math Mode? ich habde den underscore escaped.}
 
 A naive approach could be to use and extend the naming convention in a way that it also works for web renderer.
 The only adjustment to the convention needed is to introduce a new package in which the web applications are stored.
-Transferring this to above example the path to the web application would be the following:
+Transferring this to \todo{the} above example the path to the web application would be the following:
 
 \indent \centerline{\framebox{ \emph{VermessungRissRenderer/index.html}}}
 
@@ -160,7 +163,7 @@ This is necessary since it shall display JavaScript based Rich Internet Applicat
 Furthermore, the candidate component needs to offer an interface for executing JavaScript code in the context of the loaded web application and vice versa.
 As discussed above this is the preferred way for the necessary data exchange between the cids navigator and the  loaded web application.
 
-Another important requirement is the support of the latest web standards such as HTML5 and CSS 3.
+Another important requirement is the support of the latest web standards such as HTML5 and CSS 3. \todo{Im Satz werden Technologie und Standard vermischt. ...mehrere Standards...die zwei Standards...}
 Hence both technologies stand for a group of different standards, every single one with a different status and not even finished, it is impossible to make any quantitative statement about the support of both standards.
 Nonetheless there are different test tools available that can at least be used as an indicator for the support of new HTML and CSS features.
 
@@ -170,7 +173,7 @@ Therefore, the candidate components licensing must be compatible with the GPL li
 
 Besides these mandatory requirements there are also some less obligatory issues candidate API should fulfil.
 For example an important issue is how good the API is documented.
-It is an big advantage if there are developer guides, tutorials or code examples that explain the usage and ensure an easy start and usage of the candidate API.
+It is a big advantage if there are developer guides, tutorials or code examples that explain the usage and ensure an easy start and usage of the candidate API.
 Closely related to this, is the community and the support that is provided if any problems during the usage occur.
 Also relevant is, if there is a bug tracker system or a forum where individual problems can be posted and how responsive the developers or the community react on such issues.
 
@@ -203,12 +206,12 @@ community & &no \\
 For the evaluation of JavaScript MVC frameworks it is also necessary to define requirements, candidate frameworks should fulfil as good as possible.
 
 The different requirements can be classified into four groups which concerns different aspects.
-The four classes concerns the ease and speed of development,flexibility, stability and performance and legal requirements.
+The four classes concerns the ease and speed of development, flexibility,  stability and performance and legal requirements.
 
 The first category, ease and speed up of development, concerns to the general idea why a framework is used in general, and therefore is the most important one.
 The framework should reduce the amount of boilerplate code to a minimum.
 Especially important in that relation is that the framework supports two-way-data binding between the model and the view.
-This is a quite essential feature when developing cids render and editors, hence the data visualisation and manipulation is the most fundamental task of them.
+This is a quite essential feature when developing cids renderers and editors, hence the data visualisation and manipulation is the most fundamental task of them.
 Furthermore, it is a benefit, if the framework provides tools for testing and debugging the developed application.
 Another crucial factor that influences the ease of development is the quality and the  extend of the documentation as well as the size and activity of the community or the support that is offered by the framework developers.
 All these factors can simplify or complicate the development with the framework, especially if the framework is not very matured and shall be initially introduced.
@@ -228,13 +231,13 @@ The frameworks itself must ensure that the creation of memory leaks is prevented
 Furthermore also the performance of the framework is a key factor.
 Owing to the short time since MVC frameworks came up and the speed of development in this sector, the maturity of the framework as well as the future support and continuous development of the framework are also important.
 
-MVC frameworks often provide solutions for features that are not possible today, but whose are already in the standardisation process.
+MVC frameworks often provide solutions for features that are not possible today, but whose \todo{ist whose hier richtig?} are already in the standardisation process.
 For example they provide mechanism to get notified about changes in JavaScript objects.
-A corresponding feature that will be integrated in the next version of the ECMAScript standard is the Object.observer() feature.
+A corresponding feature that will be integrated in the next version of the ECMAScript standard is the Object.observer() feature. \todo{Quelle}
 Another example is the upcoming web components standard, which simplifies the development of reusable components, also a feature many MVC frameworks offer already today.
-To guarantee a long life-cycle of the developed applications it is important that the candidate frameworks makes transparent, how they plan to support such upcoming standards.
+To guarantee a long life-cycle of the developed applications it is important that the candidate frameworks makes \todo{make ohne s. Transparent richtiger Ausdruck?} transparent, how they plan to support such upcoming standards.
  
-Finally the last requirement concerns the licence of the framework again and similar to the Java web browser API, the framework licence need to be compatible with the GPL.
+Finally the last requirement concerns the licence of the framework \todo{Satzende} again and similar to the Java web browser API, the framework licence need \todo{needs} to be compatible with the GPL.
 Table \ref{tab:req_mvc_frameworks} gives an overview over the requirements.\\
 
 \begin{minipage}{\linewidth}

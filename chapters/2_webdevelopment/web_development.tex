@@ -5,7 +5,7 @@ The different available technologies are discussed in regard to their abilities 
 This shall reveal the most appropriate technology for building web applications that can be integrated in a seamless manner.
 
 The technologies, this comprises programming languages, standards, protocols and so on that can be used for building web applications are manifold.
-For example there are PHP, Python, Perl, Ruby,Java, .Net, HTML,CSS and JavaScript.
+For example there are PHP, Python, Perl, Ruby, Java, .Net, HTML, CSS and JavaScript. \todo{Evt. Node.js noch?}
 To build a web application, normally a combination of multiple of these technologies are used.
 This makes it very difficult to select the proper combination of technologies.
 The situation gets even worse, if the existing web application frameworks, that are usually used when building more complex and professional web applications, are taken into consideration.
@@ -38,14 +38,15 @@ Refreshing the whole application after every user interaction is in high contras
 Current web frameworks admittedly offer ways to avoid this but only by using client side scripting and Ajax.
 Ruby on Rails is a good example for that.
 Although Ruby is a server side programming language and Rails a server side web framework, it brings support for prototype.js which is a JavaScript framework. Thus it possible to write dynamic and user friendly web applications that can be highly interactive.
+\todo{it is possible}
 
 Another even more important issue is, that always an additional web server is required, which is responsible for data management, application logic and session management which makes the interaction with the navigator GUI more difficult.
-Just to give an example: How can the navigator be informed about data changes made in the web application? Furthermore, the most server side frameworks are intended to built full stack applications which means that they are also facilitate the creation of data models, persistence, authentication and son on.
+Just to give an example: How can the navigator be informed about data changes made in the web application? Furthermore, the most server side frameworks are intended to built full stack applications which means that they are also facilitate the creation of data models, persistence, authentication and so on.
 This doesn't really match the situation, since those functionality is already implemented in the cids server respectively the new cids RESTful API which always provides a fix interface for the client.
 
 As already mentioned, rich user experience and interaction possibilities can only be implemented with client side technologies. Therefore it is inevitable to concentrate on client side technologies when developing web applications that shall be integrated into the navigator.
 
-For a long, time significant differences in the user interaction of web applications and native desktop applications exist.
+For a long time, significant differences in the user interaction of web applications and native desktop applications exist. \todo{Vergangenheit benutzen}
 This is the reason why technologies like Adobe Flash or Java Applets came up, coining a totally new kind of web application, that should leave the drawbacks behind. With the increasing support of modern web standards such as HTML 5 , CSS3 and JavaScript in browsers, this limitation of native web applications fades away more and more. What all those technologies have in common, is that they allow to build rich internet applications, that offer the same level of user experience than native web applications. The following chapter therefore outlines and compares the different technologies that are available for building rich internet applications.
 
 
@@ -83,19 +84,19 @@ In \autocite[]{ria-comp-1} and \autocite[]{ria-comp-2} a good comparison of the 
 
 There are many issues with plugin based RIA's platforms.
 The most important one is, that always an additional browser plugin is needed.
-This limits the accessibility of web application and is contradictionary with the easy and wide spread acessibility of web applications.
-Depending on the Platform it can happen that no plugin for every browser or operating system is available.
+This limits the accessibility of web application and is contradictionary with the easy and wide spread accessibility of web applications.
+Depending on the platform it can happen that no plugin for every browser or operating system is available.
 And even if there is a corresponding plugin available, it can not be guaranteed that the plugin is installed.
 A good example for this are mobile devices.
 There is no support for Flash on any iOS device.
 In \autocite[]{jobs-thoughts-on-flash} Steve Jobs explain the reasons for this.
-Some of the reason he mention, can also be transferred to other plugin based RIA platforms.
+Some of the reason he mention, can also be transferred to other plugin based RIA platforms. \todo{mentions, oder?}
 For example Jobs criticized that Flash \enquote{[...] has not performed well on mobile devices} \autocite[]{jobs-thoughts-on-flash}.
 This issue belongs to all plugin based RIA platforms and and is not strictly limited to mobile devices.
 They need a long time to load and initialize the application.
 In addition, there is a considerably increased security risk with one or more browser plugins installed.
 Flash in particular is well known for its security vulnerabilities.
-Last but not least, most of the above mentioned platforms are not open an doesn't belong to a web standard.
+Last but not least, most of the above mentioned platforms are not open an doesn't belong to a web standard. \todo{and does not}
 
 Regarding all these issues and the latest improvements in web standards such as HTML5, CSS3 and JavaScript it is not surprising that the stake of web applications that use a plugin based RIA platform has decreased rapidly in the last years.
 Figure \ref{fig:flash_usage} depicts the current usage of Flash and Silverlight and gives a back sight for the last three years.
@@ -113,7 +114,8 @@ The crucial advantage is that no special plugin or runtime environment is requir
 Scripting-based RIA's work in all standard conform web browser and on all devices.
 This ensures that they have the same accessibility like normal web applications. For the sake of completeness it is important to note that it is possible in the most browser to disable the execution of JavaScript. But the pervasive and wide spread usage nowadays. A investigation in 2013 of Yahoo regrading this topic \autocite{web-dev:js-disabled}, claims that the maximum rate measured of users with disabled JavaScript support is roughly 2 percent. Regarding those facts, it seems that this argument can be neglected.
 
-The immense improvements in the last years regarding new standards like HTML 5, CSS3 and JavaScript remedy a lot of the till then valid drawbacks of scripting based RIA's.
+\todo{evt. gucken, dass HTML 5 nicht umgebrochen wird.}
+The immense improvements in the last years regarding new standards like HTML 5, CSS3 and JavaScript remedy a lot of the till then valid drawbacks of scripting based RIA's.\todo{till then in Komma setzen. Der Satz ist ansonsten schwer zu lesen. "Was ist the till?"}
 Just to give an example: Although they totally rely on standardized technologies, there are many differences how these standards are implemented in the different browsers, why it was often necessary to write browser depended code.
 The principal issue still exists today, but owing to the presence of frameworks that abstract from the underlying browser those problems are avoided in the most cases.
 Additionally, the rapid performance improvements of JavaScript engines in the last years, remedy the performance problem of pure script-based RIA's.
@@ -135,7 +137,7 @@ The next chapter however, shall give a more conceptual overview over these new k
 
 Modern JavaScript Frameworks like AngularJS, Ember and Knockout try to structure the code by using architectural patterns like MVC.
 In order of doing this, they achieve a separation of presentation logic, business logic and presentation state.
-Furthermore this seperation of concerns help developers to understand the framework much faster and get more comfortable with the it hence the used patterns provides them with a well known mental model.
+Furthermore this separation of concerns help developers to understand the framework much faster and get more comfortable with the it hence the used patterns provides them with a well known mental model. \todo{the it, the zuviel}
 Unfortunately not all frameworks use the classical MVC pattern as it is defined in \autocite[]{smalltalk_mvc}.
 Some of them use slightly variants of this pattern like MVVM (Model-View-ViewModel or MVP (Model View Presenter).
 Knockout for example uses the MVVM pattern to enable a loose coupling of the domain model and the view (cf.
@@ -146,12 +148,12 @@ But in fact all of the used patterns basically entail the same advantages, an An
 In he argues \enquote{Having said, I'd rather see developers build kick-ass apps that are well-designed and follow separation of concerns, than see them waste time arguing about MV* nonsense.
 And for this reason, I hereby declare AngularJS to be MVW framework - Model-View-Whatever.
 Where Whatever stands for "whatever works for you".} \autocite[]{anguler_mvw}.
-This opinion finds more and more acceptance.
+This opinion finds more and more acceptance. \todo{Den letzten Paragraph finde ich nicht gut. Einfach sagen dass Variationen zum MVC benutzt werden.}
 
 Another important feature that can be seen as a key concept of the new frameworks is automatic (two way) data binding between the model and the view.
 This means that it is possible to bind UI elements like text, or input fields to properties of the correlating model.
-Changes in the UI, for example user input, is automatically reflected to the model property, and programmatically changing the property updates the user interface.Figure \ref{fig:data-binding} demonstrates this.
-This is an immense advancement in contrast to more ancient frameworks in fact the developer isn't responsible to write and test code for that purpose by hand or need to ensure manually that changes are reflected.
+Changes in the UI, for example user input, is automatically reflected to the model property, and programmatically changing the property updates the user interface. Figure \ref{fig:data-binding} demonstrates this.
+This is an immense advancement in contrast to more ancient frameworks in fact the developer isn't \todo{Ich würde is not verwenden. Kannst aber machen wie du lustig bist http://english.stackexchange.com/questions/16203/using-contracted-forms-dont-lets-in-a-formal-text. Beim Umstellen drauf achten im ganzen Dokument zu suchen auch nach don't etc...} responsible to write and test code for that purpose by hand or need to ensure manually that changes are reflected.
 While there are multiple ways to achieve this, there are mainly two different approaches how the two way data binding is implemented.
 A good and detailed examination of those implementations can be found in \autocite[]{binding_comparison}.
 One approach is to use special JavaScript objects on the model site that are able to notify observers (the view) about changes.
@@ -168,7 +170,7 @@ The two approaches have some fundamental consequences that are discussed into mo
 	\label{fig:data-binding}
 \end{figure}
 
-Very closely related to the two way data binding feature is the usage of template engines in modern JavScript MVC frameworks.
+Very closely related to the two way data binding feature is the usage of template engines in modern JavaScript MVC frameworks.
 Templates support the developer in separating style and design from application and business logic.
 Furthermore they make it unnecessary to programmatically generate html markup.
 The template consists of html markup and some further place holders or variables where the final data gets inserted.
@@ -179,8 +181,8 @@ The latter approach is the one that is mostly used, hence using arbitrary JavaSc
 
 Shifting the application logic to the client and only fetching data from the client creates also some new problems.
 Hence the total application is loaded with the first request, no entries are added to the browsers history during the usage of the web application.
-This destroys the browsers history and with it important functions like using the back and forward button or bookmarking certain states of the application.
-This problem leads us the next core component that most of the modern frameworks provide, the routing mechanism.
+This destroys the browsers history and with it \todo{"also" anstelle von "with it"? With it finde ich sehr deutsch.} important functions like using the back and forward button or bookmarking certain states of the application.
+This problem leads us \todo{to} the next core component that most of the modern frameworks provide, the routing mechanism.
 Routing means that the different states of the application are mapped into an URL that can be used for the browsers history.
 The mostly used approach nowadays is, to use the \enquote{\#} fragment identifier of the URL (cf. \autocite{spi_manifesto}).
 The fragment identifier usually refers to an HTML element id or a named anchor in the current page and allows to automatically scroll to the position of that HTML element.
@@ -196,12 +198,12 @@ Using the fragment identifier for tracking application state is highly controver
 There are a lot of blog posts and comments that discusses this approach (cf.
 \autocite[]{hashbang_urls_1},\autocite[]{hashbang_urls_2},\autocite[]{hashbang_urls_3}).
 To put the discussion in a nutshell the main arguments against this approach are, that it changes the target of the url, hence the fragment identifier is not send to the server, and only clients with JavaScript enabled can interpret these kind of URLs.
-Using hash-bang URLs was the only possibility for tracking state in client side JavaScript applications.
+Using hash-bang \todo{was ist hashbang?} URLs was the only possibility for tracking state in client side JavaScript applications.
 Fortunately the upcoming HTML 5 standard contains a new part, the History API \autocite[]{w3c-history-api}, that allows the browser to modify the current URL and the browser history programmatically.
 The History API offers a new way for tracking application state without using hash-bang URLs and the related drawbacks.
 Hence most browsers already support the History API (see also figure \ref{fig:usage_history_api}) it is just a matter of time till this feature replace hash-bang URLs in the frameworks.
 Angular for example already offers the possibility to already use the History API (cf.
-\autocite[]{angular_location}).
+\autocite[]{angular_location}). \todo{zweimal already in einem Satz}
 
 \begin{figure}
 	\centering \includegraphics[width=1.0\textwidth]{./img/web-dev/google_crawling_hashbang.png}
@@ -211,10 +213,10 @@ Angular for example already offers the possibility to already use the History AP
 
 Another problem that comes up using JavaScript driven web applications is that they can't be analysed from search engines as easily as server centric web applications because the initial page request doesn't return a HTML document that contains the important content directly.
 But also for this drawback certain technologies exists, that remedy this disadvantage.
-The first on was announced from Google in 2009.
+The first on \todo{one} was announced from \todo{announced by, oder?} Google in 2009.
 In \autocite[]{google_AJAX_crawling} they announce a method to crawl hash-bang URLs.
 The main idea is that the crawler maps the hash-bang URL into an normal URL that contains the fragment identifier.
 Figure \ref{fig:google_crawling_ajax} depicts the idea.
 Important to note is that the web server needs to deliver a custom and search engine optimized HTML document for the URL.
 This is what all approaches have in common.
-An other upcoming approach, that gets more and more popular, is to use a headless web browser like PhantomJS on server side that is able to parse the web application like a normal browser and can output the normal HTML markup to the search bot.
+Another upcoming approach, that gets more and more popular, is to use a headless web browser like PhantomJS on server side that is able to parse the web application like a normal browser and can output the normal HTML markup to the search bot.

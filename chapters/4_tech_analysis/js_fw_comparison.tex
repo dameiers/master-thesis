@@ -1,5 +1,7 @@
 \section{Comparison of modern Java Script Frameworks}
 
+\todo{hier sollte noch ein satz hin. überschrift nach überschrift sieht doof aus.}
+
 \subsection{Overview}
 
 There is a huge and steadily increasing amount of new JS MVC frameworks.
@@ -21,7 +23,7 @@ The large amount of different frameworks makes it impossible to examine them all
 Therefore a two step approach to filter the best suiting candidate is applied.
 In a first step a very rough comparison of the frameworks is made to filter out the most inappropriate frameworks.
 The remaining frameworks are then examined in more detail in chapter \ref{chap:detail_comparison}.
-Furthermore a simple application is implemented with each framework that is selected for the detailed comparison to get a better understanding of th concepts used there.
+Furthermore a simple application is implemented with each framework that is selected for the detailed comparison to get a better understanding of the concepts used there.
 The implemented application is a Simple Greeting Application where a user can edit its first and last name and sees a greeting. 
 It is obvious that the complexity of this demo application is not sufficient to demonstrate the powerfulness of the frameworks or to compare them. But it allows first impressions of the concepts that are used, and how effectively writing boilerplate code is avoided.
 
@@ -57,12 +59,12 @@ Both has several additional features like UI-elements, effects and animations.
 Both doesn't provide components that implement MVC pattern and don't provide the user with built in features like data binding, templating or routing and are therefore not taken into further considerations.
 
 CanJS, Soma.js and Maria are very new MVC Frameworks all providing a different set of features and a different emphasis.
-According to \autocite{tech-ana:canJS-presentation} CanJS combines the best features of lightweight frameworks like BackboneJS, which are easy to learn and have a small size, as well as of heavy frameworks like EmberJS which offer a lot of good features like live binding,computed properties and memory safety.
+According to \autocite{tech-ana:canJS-presentation} CanJS combines the best features of lightweight frameworks like BackboneJS, which are easy to learn and have a small size, as well as of heavy frameworks like EmberJS which offer a lot of good features like live binding, computed properties and memory safety.
 CanJS can use EJS or Mustache as templating engines which are both string based templating engines.
 In one sentence CanJS can be characterized through its high performance, its memory leak prevention and the fact that it can be used with a lot of different DOM libraries.
 
 Although soma.js can be used as a MVC framework, the basic idea behind soma.js is a more general and architectural approach.
-"soma.js  provides tools to create a loosely-coupled architecture broken down into smaller pieces." \autocite{tech-ana:somaJS} In order to do so, it implements a large set of different design patterns, like dependency injection, observer pattern or mediator pattern and the MVC pattern.
+"soma.js  provides tools to create a loosely-coupled architecture broken down into smaller pieces." \autocite{tech-ana:somaJS} \todo{enquote} In order to do so, it implements a large set of different design patterns, like dependency injection, observer pattern or mediator pattern and the MVC pattern.
 Soma.js implements its own template engine based on soma.js.
 The more architectural bias makes it less comfortable for the developer to work with soma.js since a lot of work needs to be done manually that other frameworks do automatically.
 
@@ -76,12 +78,12 @@ This disqualifies these frameworks as possible candidates.
 One of the more matured and proven frameworks is Backbone JS.
 A lot of really large and impressive projects are built with backbone.js such as LinkedIn, AirBnB, Trello or FourSquare.
 Hence its maturity, it is well documented and there is a large and active community which makes it easy to find help.
-Backbone JS  consists of different components concerning all necessary aspects of building single page web application such as models, views and routers.
+Backbone JS \todo{Backbone JS sollte nicht umgebrochen werden} consists of different components concerning all necessary aspects of building single page web application such as models, views and routers.
 Thus application built with backbone normally have a clear defined structure \autocite{tech-ana:heise-backbone}.
-Backbone has built in support for persisting model data to REST apis.
+Backbone has built in support for persisting model data to REST apis. \todo{API gross? siehe auch unten}
 To make this built in component to work properly it is necessary to have a correlation of your model names and the REST api paths.
 The backend connection can be implemented manually if the standard one is not suited.
-There are already some existing Modules that do this like Backbone.localstorage which stores all data in the Browser itself.
+There are already some existing Modules that do this like Backbone.localstorage which stores all data in the Browser itself. \todo{nomen wurden hier grossgeschrieben}
 
 An adverse is, that Backbone JS is not able to reflect changed model data to the view automatically (and vice versa).
 Backbone's approach to achieve this is much more lightweight.
@@ -90,21 +92,23 @@ A backbone view can listen to these events.
 Each view has a render function, which generates the HTML for displaying the view.
 This function needs to be implemented manually for each view.
 This approach allows it to use any templating engine.
-Since backbone needs the dependency to underscore, you can use the templating function from this library.
+Since backbone needs the dependency to underscore \todo{was ist underscore?}, you can use the templating function from this library.
 Another drawback is that, backbone does not manage the display of different views.
 Admittedly it provides a router object, but again, this objects just defines what function should be executed when a route is loaded.
 The developer has to initialize the new view and to destroy all views no longer needed.
 There is always the danger of memory leaks which causes several performance and security issues.
-At least, using backbone means a lot of initialisation overhead, since it is first necessary to define the domain model and set up the infrastructure.
+At least, using backbone \todo{Backbone JS} means a lot of initialisation overhead, since it is first necessary to define the domain model and set up the infrastructure.
 Considering all this disqualifies Backbone JS as possible candidate.
       
 The remaining 3 Frameworks does not have any of the above mentioned drawbacks and are used for a much more detailed examiniation described in the following chapter.
 
 \subsection{Comparison of AngularJS, EmberJS and KnockoutJS}\label{chap:detail_comparison}
 
+\todo{hier auch ein kleiner satz?}
+
 \subsubsection{Knockout JS}
 
-Knockout JS is a more leightweight library, which emphasis is to implent the MVVM (Model-View-ViewModel) pattern for HTML.
+Knockout JS is a more lightweight library, which emphasis is to implement the MVVM (Model-View-ViewModel) pattern for HTML.
 This pattern enriches HTML with two way data binding and a seperation of concerns, which means that the application logic is seperated from the business logic and the model.
 
 The two way data binding is implemented by using special Java Script Objects, so called Knockout observables and a special HTML attribute both provided by Knockout.
@@ -136,7 +140,7 @@ ko.applyBindings(new ViewModel());
 
 The data-bind attribute of the input element (see line 3 in listing \ref{lst:ko-2}) tells Knockout to bind the properties of the ViewModel object to an attribute of the containing element (in this case the value attribute of the input element).
 There is a large set of predefined bindings for different purposes.
-There are controlling and appearance bindings such as the visible or the style binding, control flow bindings such as the foreach binding to iterate over a set of ViewModel properties and at least, form field bindings.
+There \todo{They? - Ich habe Probleme den Satz zu verstehen.} are controlling and appearance bindings such as the visible or the style binding, control flow bindings such as the foreach binding to iterate over a set of ViewModel properties and at least, form field bindings.
 If these bindings are not sufficient it is possible to create custom bindings.
 
 
@@ -170,15 +174,15 @@ var viewModel = ko.mapping.fromJS(person);
 
 Knockout JS doesn't support attaching a server side backend or REST API.
 Furthermore it is not able to route between different pages of your application.
-Thus these parts of the SPA has to be implemented by your own or with additional frameworks.
+Thus these parts of the SPA \todo{was ist SPA?} has to be implemented by your own or with additional frameworks.
 
 \subsubsection{Ember JS}
 
 Ember JS is one of the younger frameworks, mainly created by Yehuda Katz and Tom Dale and introduced in December 2011 \autocite{tech-ana:announcing-ember}.
-In this short time Ember JS could make a really impressive progress and has gained a lot of attraction which can be concluded from the number of github stars and watches.
+In this short time Ember JS could make a really impressive progress and has gained a lot of attraction which can be concluded from the number of github stars and watches. \todo{GitHub gross schreiben. Sternchen zählen finde ich nicht so wissenschaftlich. Evt. umschreiben.}
 It comprises all necessary parts for building web applications including two way data binding with templates, a routing mechanism and provides a way to connect the application to REST API's.
 
-Ember is a very stringent and opinionated framework and is built upon concepts such as DRY (dont repeat yourself) and CoC (Convention over Configuration).
+Ember \todo{Einheitliche Schreibeweise einhalten? Ember.js kommt auch vor. Bei Ember JS auf zeilenumbruch achten. Nur Ember Benutzen ist wohl auch ok, besonders später. Dann aber im groß.} is a very stringent and opinionated framework and is built upon concepts such as DRY (dont \todo{don't?} repeat yourself) and CoC (Convention over Configuration).
 Especially the usage of naming conventions allows it to write applications with a nominal amount of code.
 The disadvantage of this is, that it is more sophisticated to get started with Ember.js because the philosophy and the concepts of Ember need to be understand in first step.
 The full stack and opinionated approach are the reason why Ember is one of the largest frameworks (56k).
@@ -240,9 +244,9 @@ By convention Ember treats this as Application template in fact the id attribute
 The ApplicationTemplate is the right place for static content like headers, footers or menu bars, in fact it gets always rendered first.
 The \{\{outlet\}\} tag tells ember where to fill in dynamic content that depends on the currently loaded route.
 After this initialization the Ember router starts the routing process and routes to the current route.
-This is normally the plain basic url.
+This is normally the plain basic url. \todo{URL gross, auch unten}
 This path is connected per convetion to Embers IndexRoute so that the Router takes all steps to initialize the IndexRoute.
-One important note to mention here, is that the templates are standard handlebars templates.
+One important note to mention here, is that the templates are standard handlebars templates. \todo{Handlebar Name und Einzahl?}
 
 As outlined above, a very central concept of Ember is routing.
 Every Ember application needs a Router in fact the router translates a URL into a series of templates and is responsible for loading these templates as well as respective model data and sets up other application state.
@@ -267,7 +271,7 @@ The table in figure \ref{fig:ember_routes} demonstrates the naming convention.
 
 Starting the above mentioned code snippets would result in a page showing empty input fields for both properties, because the templates that are involved are not backed with a model that contains data the templates should display.
 
-Every template is backed by a model, and the route defines what model should be used by the template .
+Every template is backed by a model, and the route defines what model should be used by the template.
 As depicted in the table above, ember will look for an App.IndexRoute by convention, so this is the right place where we need to point to the model.
 
 \begin{lstlisting}[label=em_controller,caption=app.js]
@@ -314,7 +318,7 @@ In the IndexRoute object, we finally point to our model instance.
 
 Per default it is not necessary to define a controller for the IndexRoute, but by convention Ember assumes that the IndexController manages a list of model objects and therefore expects an array for the model property.
 Another way to achieve the same thing, is demonstrated in the following listing.
-We simply define an special Ember Array and add our created Person instance to it, and finally point the IndexRoute to the array instead.
+We simply define a special Ember Array and add our created Person instance to it, and finally point the IndexRoute to the array instead.
 Since we now have an array as our model, we need to adjust the template, to iterate over all existing array members (see listing \ref{em_array_template}).
 
 \begin{lstlisting}[caption=app.js]
@@ -358,12 +362,12 @@ Therefore the only thing we need to change is to replace the input element with 
 	{{view Ember.TextField valueBinding="firstName"}}
 \end{lstlisting}
 
-As mentioned earlier, Ember also provides a way to automatically connect Ember Models to an REST API. However, an explanation of this module would be out of the scope of this chapter, hence no furhter basic concepts are involved. Furthermore, using ember data has some crucial disadvantages which are discussed in section \ref{chap:fw-discussion}.
+As mentioned earlier, Ember also provides a way to automatically connect Ember Models to a REST API. However, an explanation of this module would be out of the scope of this chapter, hence no furhter basic concepts are involved. Furthermore, using ember data has some crucial disadvantages which are discussed in section \ref{chap:fw-discussion}.
 
 \subsubsection{Angular JS}  
 
-AngularJS is developed by Google and has become one of the more popular Frameworks.
-AngularJS follows a slightly different apporach compared to the other frameworks.
+AngularJS \todo{einheitliche Schreibweise, AngularJS überschrift hat es ein Leezeichen. Siehe auch unten, es kommt z.B. auch mal "angular" vor} is developed by Google and has become one of the more popular Frameworks.
+AngularJS follows a slightly different approach compared to the other frameworks.
 This approach is best described by the Angular developers itself: \enquote{Angular is what HTML would have been had it been designed for applications} \autocite{tech-ana:ng-intro}.
 One aspect that shows the difference of Angular are the so called directives, which are a key concept of AngularJS.
 Directives allow the user to extend the native HTML with new and application dependent functionality.
@@ -380,7 +384,7 @@ All these components and features make it easy to write Single Page Web Applicat
 %- is the one with the most community activity (github forks, stars, watches) 
 
 Listing \ref{angularBasic} shows the very simple implementation of the same app used before.
-The special here is that it is not necessary to write one line of JavaScript code to get things work.
+The special here is that it is not necessary to write one line of JavaScript code to get things work \todo{working}.
 Unfortunately this example isn't very intuitive and it seems that there happens a lot of magic behind the scenes.
 In the following sections the details of the example and the important concepts of AngularJS are explained.
 
@@ -434,7 +438,7 @@ The Module that should be loaded can be referenced in the ng-app directive.\\[5m
 
 The first parameter of the module creation (line 4 of listing \ref{ngModule}) defines the name of the module that must be used for referencing it in the ng-app directive.
 The second parameter can be used to define other modules as dependency for this module.
-These dependent modules are created first and then injected into the module per Dependency Injection.
+These dependent modules are created first and then injected into the module per Dependency Injection \todo{Ist der Begriff wirklich ein Name, wegen großschreibung?}.
 Among others,the most notably advantage of this approach is, that the separation in modules simplifies unit testing, since not all modules must be loaded for unit testing and additional modules can be loaded, that, can provide some mock up functionality for testing.
 This helps writing end-to-end test for the application and allows easily testing the GUI behaviour with unit tests. 
 
@@ -451,16 +455,16 @@ The ng-model directive binds those properties to the element it is defined in, w
 The automatic creation of model properties, is an important difference compared to Knockout and Ember, where this needs to be done manually.  
 Before explaining this feature in more detail it is necessary to have a closer look on Angualars scope concept which also requires to understand the meaning of Models, Views and Controllers in the Angular architecture.
 
-The Scope is an object that refers to the application model and provides necessary context for Expressions and directives.
-An Angular expressions are a JavaScript-like code snippets that are usually places in data-bindings and can be used for accessing model properties and some basic calculations.
+The Scope is an object that refers to the application model and provides necessary context for Expressions \todo{klein?} and directives.
+Angular expressions are JavaScript-like code snippets that are usually places in data-bindings and can be used for accessing model properties and some basic calculations.
 Scopes can watch Angular expressions and propagate events.
 These features are used also internally to implement the two way data binding.
-Scopes are the "glue between application controller and the view" \autocite{tech-ana:ng-scope} and are comparable to Knockouts ViewModel.
+Scopes are the "glue between application controller and the view" \autocite{tech-ana:ng-scope} \todo{enquote} and are comparable to Knockouts ViewModel.
 An Angular application always consists of exactly one RootScope and multiple ChildScopes.
 They are hierarchical nested and resemble the DOM structure as figure \ref{fig:angular_scopes} depicts.
 Similar to the model declaration, this can also happen implicit by directives like the ng-repeat directive in figure \ref{fig:angular_scopes}.
 ChildScopes prototypically inherit from their parent scope.
-Hence, if an binding expression like {{firstName}} is evaluated, Angular first checks if the Scope object related to that element contains this property.
+Hence, if a binding expression like \{\{firstName\}\} is evaluated, Angular first checks if the Scope object related to that element contains this property.
 If not it checks all parent scopes until the property is found or the RootScope is reached.
 
 \begin{figure}
@@ -470,8 +474,8 @@ If not it checks all parent scopes until the property is found or the RootScope 
 	\label{fig:angular_scopes}
 \end{figure} 
 
-In Angular a Model can be any JavaScript object including Arrays and primitives.
-The only condition is that it must be referenced by a Scope object.
+In Angular a Model can be any JavaScript object including Arrays \todo{besser klein?} and primitives.
+The only condition is that it must be referenced by a Scope \todo{besser klein?} object.
 The name of the scope property is also the model identifier that can be used for accessing the value in expressions.
 The creation of models can be done explicit or implicit.
 In listing \ref{angularBasic} the model is created implicit with the ng-model directive.
@@ -480,7 +484,7 @@ To create a model explicit it is necessary to add new properties to the scope in
 As already mentioned, Controllers are also a way to create models in Angular and adding them to the Scope.
 Controllers are JavaScript functions that are used to augment the Angular scope and are normally used to set up initial state of the Scope or to add application behaviour to it.
 Listing \ref{angularController} depicts the needed changes.
-
+\todo{Irgendwie verhindern dass das Listing auf zwei seitein ist und ein Bild dazwischen kommt. Ist bei mir grad der Fall.}
 \begin{lstlisting}[label=angularController,caption=Angular Controller]
 <html>
 ....
@@ -498,7 +502,7 @@ Listing \ref{angularController} depicts the needed changes.
 There are two ways how Controllers are associated with Scope objects.
 The first one is to use the ng-controller directive as in the example above.
 The second one is to use Angulars Routing mechanism.
-Another important thing to mention here is that the Scope object is provided by Angulars DI (Dependenci Injection) system.
+Another important thing to mention here \todo{here würde ich einfach streichen} is that the Scope object is provided by Angulars DI (Dependency Injection) system.
   
 
 The last component to cover all elements of the MVC pattern is the View.
@@ -517,16 +521,16 @@ A really useful feature that makes Angular outstanding are Filters.
 Filters are a way to format data that should be displayed to the user.
 For example, if we want to print the fullName property of our basic example in uppercase letters we just need to use the Uppercase filter provided by Angular (see listing \ref{angular_filters}).
 Angular already provides a basic set of very useful Filters among them Filters for ordering or filtering lists of data but it is also possible to create custom ones.
-Filters are used in Angular expressions with an pipe like syntax.
+Filters are used in Angular expressions with a pipe like syntax.
 
 \begin{lstlisting}[label=angular_filters,caption=Angular Filters]
  {{ fullName | uppercase}}
 \end{lstlisting}
 
 The last concept are Services.
-Services in Angular apps are substitutable objects that are wired together using dependency injection. Angular Services are implemented as singletons and are used to carry out specific tasks common to web apps and reusable business logic independent of views. Angular provides an impressive set of services such as the \$http service that provides low level access to the browser's XMLHttpRequest object and can be used to make AJAX requests.
+Services in Angular apps are substitutable objects that are wired together using dependency injection \todo{Falls vorher gross dann auch jetzt.}. Angular Services are implemented as singletons and are used to carry out specific tasks common to web apps and reusable business logic independent of views. Angular provides an impressive set of services such as the \$http service that provides low level access to the browser's XMLHttpRequest object and can be used to make AJAX requests.
 
-The routing mechanism is also implemented as service. This has the advantage that it can be easily injected by dependency injection in every module that wants to use the routing mechanism. The oruting service tries to map the path of the current location to an existing route definition. Listing \ref{lst:ng-routes} demonstrates that a route definition basically consists of the template that should be loaded and the controller function the route is related with. The url the route is defined for can also contain dynamic parts, for example the bookId field, that indicates the controller which book object shall be displayed.
+The routing mechanism is also implemented as service. This has the advantage that it can be easily injected by dependency injection in every module that wants to use the routing mechanism. The routing service tries to map the path of the current location to an existing route definition. Listing \ref{lst:ng-routes} demonstrates that a route definition basically consists of the template that should be loaded and the controller function the route is related with. The url the route is defined for can also contain dynamic parts, for example the bookId field, that indicates the controller which book object shall be displayed. \todo{m.E. zu langer Satz außerdem beginnt er mit zwei Nomen. Nebensatz mit Komma einleiten}
 
 \begin{lstlisting}[label=lst:ng-routes,caption=Route definition in AngularJS]
 var mod = angular.module('ngViewExample', ['ngRoute'])
@@ -551,25 +555,25 @@ mod.config(function($routeProvider, $locationProvider) {
 \subsection{Discussion} \label{chap:fw-discussion}
 
 
-After giving a first introduction into the concepts of Knockout.js, Ember.js and AngularJS, it is necessary to discuss the pros and cons of the different frameworks.
+After giving a first introduction into the concepts of Knockout.js, Ember.js and AngularJS, \todo{Schreibweise} it is necessary to discuss the pros and cons \todo{Abkürzungen zu informell?} of the different frameworks.
 
 Knockout JS very reduced feature set can be both, a blessing and a curse and it depends on the needs to decide what of these two things prevails.
 Knockout JS is a very easy to learn library hence there are only a few concepts to learn.
 Another benefit of Knockout JS is, that it has a widely spreaded browser support also for older browser versions.
 This benefit is not that much relevant since the applications to develop should be rendered in the JavaFX WebKit component.
-Knockout is a very flexible framework hence there are  no regulations for defining the structure and architecture of your application.
+Knockout is a very flexible framework hence there are  no regulations for defining the structure and architecture of your \todo{your würde ich hier vermeiden} application.
 The missing features of Knockout JS like routing can be compensated with one of the other dozen available third party libraries for this feature.
 Unfortunately, without these additional dependencies Knockout JS is rather less suited for building more complex web applications in fact that it forces you to implement too many things manually.
 And the additional amount of dependencies could lead to inconsistency problems, increases the error likelihood and the maintenance efforts and make the development even harder (cf \autocite{heise_knockout}).  
 
-Ember however, covers all needed aspects of developing SPA's.
+Ember however, covers all needed aspects of developing SPA's. \todo{SPAs}
 It is possible to write applications with a minimal amount of code, and its concept scale very well, which means it is very easy to write simple applications with Ember that reduces the amount of boilerplate code to a minimum, but the underlying concepts cover also the possibility to create large and complex Single Page Web Applications. With the concept of Ember Components, it is possible to develop reusable components that are furthermore planned to support the upcoming web components standard. 
 The only disadvantage is, that Ember is a very strict and opinionated framework.
 This is especially true for ember-data which relies heavily on naming conventions to properly work.
 Although using approaches like Convention over Configuration is not a principal disadvantage, the question is, if the very stringent corset of Ember will limit further developments or produces a lot of efforts to work around the built in framework concepts.
 Ember-data is a good example for that.
-Ember-data makes highly use of naming conventions and makes assumptions on the structure of the REST API of the backend. Hence the RESTful API is already defined, it is very likely that the assumptions of ember-data will not correlate with cids REST API, which means that the concepts of the framework need to be work around.
-It can not be ruled that similar problems could also arise in other parts of the framework, for example the routing mechanism. 
+Ember-data makes highly use of naming conventions and makes assumptions on the structure of the REST API of the backend. Hence the RESTful API is already defined, it is very likely that the assumptions of ember-data will not correlate with cids REST API, which means that the concepts of the framework need to be work around \todo{nicht sicher ob das so richtig ist. need to be worked around evt?}.
+It can not be ruled \todo{out} that similar problems could also arise in other parts of the framework, for example the routing mechanism.
 
 At this point, the concepts of dependency injection, and services, makes Angular much more flexible.
 Similar to Ember, Angular is also capable of building all kind of applications, from the simple to the complex one.
@@ -577,7 +581,9 @@ From special interest is the very central concept of directives, which can be us
 The large number of concepts makes it a bit harder to get familiar with Angular, but if the concepts are clear, it is very intuitive to build applications with Angular.
 Outstanding points of Angular are besides directives, the usage of Dependency Injection, which allows to easily reuse developed Filters, Services and Modules. Additionally the dependency injection increases the testability of the applications and gives the possibility to easily write end to end unit tests. 
 
-Regarding the performance of Angular and Ember there are some important notes to mention. As outlined in chapter \ref{chap:web_dev} Angular and Ember follow two very different approaches for achieving data binding. In Ember it is necessary to use special objects for the model. Those objects makes it possible to notify about changes. In Angular it is possible to bind to arbitrary JavaScript objects. It uses dirty-checking to test if any of the binded objects has changed.
+Regarding the performance of Angular and Ember there are some important notes to mention. As outlined in chapter \ref{chap:web_dev} Angular and Ember follow two very different approaches for achieving data binding.
+In Ember it is necessary to use special objects for the model. Those objects makes it possible to notify about changes.
+In Angular it is possible to bind to arbitrary JavaScript objects. It uses dirty-checking to test if any of the bound objects has changed.
 The two approaches have some fundamental consequences.
 The first and most obvious one is that using dirty checking means that it is possible to bind directly to native JavaScript objects.
 This makes the binding expressions slightly more intuitive since no get or set functions are needed to access the properties.
@@ -608,7 +614,7 @@ To be fair, the disadvantage of dirty checking first appears when typing in the 
 In this case Angular needs to check all 5000 items although only 1 has changed. 
 This makes typing a bit sluggish. 
 This example impressively demonstrates that both approaches can have bottleneck effects and it depends on the developer to regard the performance when developing the application. 
-A simple solution to avoid the bottleneck affect in Angular is two use multiple scopes.
+A simple solution to avoid the bottleneck affect in Angular is to use multiple scopes.
 
 \begin{figure}
 	\centering	
@@ -618,21 +624,22 @@ A simple solution to avoid the bottleneck affect in Angular is two use multiple 
 \end{figure} 
 
 Another important part that is also listed in the requirements in chapter \ref{chap:requirements} is the documentation, the community support and the existence of test tools. 
-But also here the difference between Ember and Angular are more from a marginal nature. 
+But also here the difference between Ember and Angular are more from a marginal nature. \todo{Der satz gefällt mir nicht, besonders der Ausdruck: are more from a marginal nature}
 The documentations are both very extensive and from a good quality. 
 There a many examples that allow to easily use the frameworks. 
-Furthermore the documentaion of  Ember as well the Angular documentation both provide tutorial ans How-To articles. 
-However, from a subjective point of view, it appears the the Angular documention has a slight advantage, which may be due to the fact that Ember is the much younger framework. 
+Furthermore the documentation of  Ember as well the Angular documentation both provide tutorial and How-To articles. 
+However, from a subjective point of view, it appears the the Angular documentation has a slight advantage, which may be due to the fact that Ember is the much younger framework. 
 The maturity of Angular can also be the reason for the larger community and popularity of the framework. 
-But again, for bot frameworks it is easy to find information or get help. 
+But again, for both frameworks it is easy to find information or get help. 
 
 Regarding the support of test and debugging tools it seems that Angular has a slight advantage hence it has a very good built in testability and also provides a debugging tool Batarang. Batarang helps to examine the scope structure the application and helps monitoring and optimzing the performance. Unfortunately Batarang is only available as Google Chrome extension and cannot be used in the JavaFX WebView.
 
-Summing up, Knockout.js can not be used, hence it has a reduced feature set and does not offer a routing mechanism or reusable components. Embers very stringent and opinionated approach bears the danger that the framework can limit future developments and complicated and sophisticated workarounds are necessary. Hence AngularJS has none of the above mentioned disadvantages, it is clear that AngularJS is the most promising candidate and shall be used for the further considerations. Table \ref{tbl:js-fw-comp} gives an overview over the different features of each framework and allows a more accessible comparison of them. The disqualifying factors are emphasized with with a coloured background. Up to know the conception of the new required feature is outlined, and the most suiting candidate regarding the browser API as well as a JavaScript MVC Framework is evaluated. Now, that all prerequisites are fulfilled it is possible to start with the implementation.
+Summing up, Knockout.js can not be used, hence it has a reduced feature set and does not offer a routing mechanism or reusable components. Ember's very stringent and opinionated approach bears the danger that the framework can limit future developments and complicated and sophisticated workarounds are necessary. Hence AngularJS has none of the above mentioned disadvantages, it is clear that AngularJS is the most promising candidate and shall be used for the further considerations. Table \ref{tbl:js-fw-comp} gives an overview over the different features of each framework and allows a more accessible comparison of them. The disqualifying factors are emphasized with with a coloured background. Up to know the conception of the new required feature is outlined, and the most suiting candidate regarding the browser API as well as a JavaScript MVC Framework is evaluated. Now, that all prerequisites are fulfilled it is possible to start with the implementation. \todo{In der Tabelle bei den Kategorien auf Groß- und Kleinschreibung achten. GitHub z.B.}
 
 
 
 \label{tbl:js-fw-comp}
+
 %\todo{ emph disqualifying factors}
 	\begin{tabular}{|m{2.8cm}|>{\centering\arraybackslash}m{3.5cm}|>{\centering\arraybackslash}m{3.5cm}|>{\centering\arraybackslash}m{3.5cm}|}
 	\hline
@@ -648,8 +655,8 @@ Summing up, Knockout.js can not be used, hence it has a reduced feature set and 
 		& \checkmark / \checkmark
 		& \checkmark / \checkmark\\ \hline
 	Testing				
-		& end-to-end tests, build in tools for unit tests,debugging extension for chrome 
-		& extra packages ember-testing,qUnit 
+		& end-to-end tests, build in tools for unit tests, debugging extension for chrome 
+		& extra packages ember-testing, qUnit 
 		&  unit tests \\ \hline
 	Routing				
 		& \checkmark 
