@@ -86,7 +86,7 @@ The following evaluation matrix summarises the pros and cons of the above introd
 Despite an exhaustive literature research it was not possible to find a full feature list of the WebView concerning modern web standards like CSS3, JavaScript or HTML5.
 To ensure that the WebView is able to render modern web applications, especially JavaScript based applications, correctly, it is necessary to test the compliance to web standards and the behaviour when trying to visualise JavaScript applications.
 This is done with several test tools that are available on the web.
-The following section carries out what test tools are used, gives an short description about each test tool and outlines the results of the WebView as wells as the results of the Google Chrome browser to allow a first comparison.
+The following section carries out what test tools are used, gives a short description about each test tool and outlines the results of the WebView as wells as the results of the Google Chrome browser to allow a first comparison.
 
 The first test that is executed is the ACID 3 test originated in 2008.
 The test is defined by the Web Standards Project and can be found at \autocite{tech-ana:acid3}.
@@ -94,10 +94,10 @@ According to \autocite{tech-ana:acid3} the test \enquote{[...] is primarily test
 Important to note is, that the resulting image is not the only criteria to pass the test.
 Also the animation has to be smooth.
 As figure \ref{fig:acid_webview} depicts, the test is not fully passed.
-Unfortunately the test give no information what test has failed or what standard the browser is not compliant to.
+Unfortunately the test gives no information what test has failed or what standard the browser is not compliant to. \todo{give . Finde what hier komisch, which ist passender.}
 Besides this obvious failure, the animation smoothness compared to other browsers, especially compared to Google Chrome, is considerably worse.
-Another important thing to mention is, that it is recommended to execute the acid 3 test with default settings hence e.g changing the zoomlevel "[...] may alter the rendition of the test page without this constituting a failure in compliance." \autocite{tech-ana:acid3}.
-In fact the tests are executed with the Oracle demo application, where it is not possible to a maximum size for the applciation, it is unclear if the layouting mechanism used in JavaFX influences the test results.
+Another important thing to mention is, that it is recommended to execute the ACID 3 test with default settings hence e.g changing the zoomlevel "[...] may alter the rendition of the test page without this constituting a failure in compliance." \autocite{tech-ana:acid3}. \todo{enquote benutzen}
+In fact the tests are executed with the Oracle demo application, where it is not possible to a maximum size \todo{maximize?} for the application, it is unclear if the layouting mechanism used in JavaFX influences the test results.
 
 \begin{figure}
 \begin{minipage}[t]{7cm}
@@ -126,6 +126,7 @@ Thus, the rather poor result (see \ref{fig:html5_webview}) can be relativated a 
 
 \begin{figure}
 \begin{minipage}[t]{7cm}
+\todo{Falsches Caption}
 	\centering
 	\includegraphics[width=7cm]{./img/tech-ana/html5_result_webview.png}
 	\caption{Result Image of the Acid Test - WebView browser}
@@ -183,6 +184,7 @@ Although this seems to be a large number, the percentage stake of failed tests i
    
 \begin{figure}
 \begin{minipage}[t]{7cm}
+\todo{falsches caption}
 	\centering
 	\includegraphics[width=7cm]{./img/tech-ana/ecma_result_webview_small.png}
 	\caption{Result Image of the Acid Test - WebView browser}
