@@ -3,15 +3,15 @@
 \section{Conclusion}
 
 The navigator is successfully extended with the ability to integrate arbitrary web applications, which is one of the main objectives of the presented work. 
-Withal, the degree how seamless an web application is integrated, is very scalable and reaches from the simple display of web applications to highly integrated components, that interact with the already existing Swing based navigator GUI and behave like already existing Swing renderer. 
+Withal \todo{Laut Leo ist withal veraltet. Mir war des Wort nicht bekannt.}, the degree how seamless a web application is integrated, is very scalable and reaches from the simple display of web applications to highly integrated components, that interact with the already existing Swing based navigator GUI and behave like already existing Swing renderer. \todo{plural} 
 This scalability ensures that the kind of web application that can be integrated is not restricted.
 
 The implemented approach allows a very easy configuration to indicate when a web application shall be used as renderer and editor. 
-Using the already existing class attributes it is possible to gain from the already existing support in the cids management tools. 
+Using the already existing class attributes it is possible to gain \todo{benefit, kA ob gain passt} from the already existing support in the cids management tools. 
 Hence the configuration is based on cids classes, it is possible to easily mix the usage of swing and web based renderer in one application.
 
 Another beneficial side effect, is the introduction of the new JavaFX WebView as additional and optional browser API for description pages that offer additional information for a catalogue node.
-Hence the JavaFX is much more feature rich than the two browser API's that can be used up to now, totally new possibilities in the design of description pages are available now. 
+Hence the JavaFX is much more feature rich than the two browser API's that can be used up to now, totally \todo{ist totally hier das passende Wort} new possibilities in the design of description pages are available now. 
 An important key factor of the implementation is that the usage of the JavaFX WebView as browser for description pages is easily configurable with a new property in the navigators configuration file and is fully backward compatible. 
 This is especially important because it can not be guaranteed that JavaFX is available on every client.
 
@@ -39,18 +39,18 @@ Additionally, it must be possible to add land parcels to a survey plan.
 In the swing version, a dialog that supports the user choosing a land parcel exists. 
 A similar functionality is also needed in the html version.
 
-Another important issue that was not regarded in the implementation is to extend the survey plan application, to use different styles, depending on the context it is nested in.
+Another important issue that was not regarded in the implementation is to extend the survey plan application, to use different styles, depending on the context it is nested in. \todo{it is nested in gefällt mir nicht} 
 Within the navigator the design that emulates the Swing renderer is sensible. 
-However, when the application is used standalone in a web browser or is used in an other context, a design more suitable to web pages is preferred. 
+However, when the application is used standalone in a web browser or is used in another context, a design more suitable to web pages is preferred. 
 That this is possible in general shows the trend of responsive web design, which adopts the layout of the web application to the size of the device it is used. 
 A possible approach to implement this, is to use browser sniffing which allows to react on the browser that is used.
 
 Besides the open extensions of the demo application, there are as well some minor issues with the JavaFX WebView itself. 
 The first one is that the visualisation of web applications in the WebView is slightly blurry and has not a good quality like other browsers. 
-Unfortunately no solution or possible workaround can be found at present. There is an reasonable expectation that this problem is solved automatically with the next major release of the Java runtime environment version 8 since the official oracle roadmap points out enhancements of the WebView for that release. 
+Unfortunately no solution or possible workaround can be found at present. There is a reasonable expectation that this problem is \todo{will be solved} solved automatically with the next major release of the Java runtime environment version 8 since the official oracle roadmap points out enhancements of the WebView for that release. \todo{Quelle}
 Possibly, the current workaround that styles the options list of select elements is no longer needed in that version and it is possible to define the style in the CSS context of the web application.
    
-Regarding the bi-directional data exchange of the navigator and integrated web applications, it is clear that there is also open work to do. 
+Regarding the bi-directional data exchange of the navigator and integrated web applications, it is clear that there is also open work to do. \todo{den Ausdruck open work gibt es so glaube ich nicht. Evt. some issues are still open} 
 As outlined, the interface is based on the RESTful cids server API, but not fully implemented. 
 There is also the chance to create a \enquote{cids-legacy implementation} of this API, that only implements a subset of the cids REST API. 
 This implementation can use already existing cids server functionality, but is accessed as RESTful API, which offers the chance to already develop complex web applications based on cids. 
