@@ -291,7 +291,7 @@ Figure \ref{fig:cidsJS} gives an overview of the architectural design.
 \end{figure}
 
 The web renderer component shall only communicate with the cidsJS layer which abstracts the context the web renderer component is executed in.
-As depicted in figure \ref{fig:cidsJS} the cidsJS layer needs to define fix interfaces for both sides, the client side, and the backend side, hence especially the navigator needs to inject data into the application context and needs to register a bridge object for data exchange.
+As depicted in figure \ref{fig:cidsJS} the cidsJS layer needs to define well defined interfaces for both sides, the client side, and the backend side, hence especially the navigator needs to inject data into the application context and needs to register a bridge object for data exchange.
 The cidsJS layer is represented as a JavaScript object that can be easily accessed within the whole JavaScript context of the loaded page and thereby is easily accessible within the Java scope.
 A very common practice for this is to use an anonymous function that handles the initialisation of the cidsJS layer object and finally exposes this object to the global scope of the application afterwards. 
 A similar approach is used in other frameworks such as JQuery or Prototype.
