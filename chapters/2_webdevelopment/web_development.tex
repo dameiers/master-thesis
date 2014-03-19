@@ -37,16 +37,16 @@ All these points are disadvantageous when trying to integrate server driven web 
 Refreshing the whole application after every user interaction is in high contrast with the partial refresh of native desktop applications and needs to be avoided for a uniform user experience.
 Current web frameworks admittedly offer ways to avoid this but only by using client side scripting and Ajax.
 Ruby on Rails is a good example for that.
-Although Ruby is a server side programming language and Rails a server side web framework, it brings support for prototype.js which is a JavaScript framework. Thus it possible to write dynamic and user friendly web applications that can be highly interactive.
+Although Ruby is a server side programming language and Rails a server side web framework, it brings support for prototype.js which is a JavaScript framework. Thus it possible to write dynamic and highly interactive web applications.
 
-Another even more important issue is, that always an additional web server is required, which is responsible for data management, application logic and session management which makes the interaction with the navigator GUI more difficult.
-Just to give an example: How can the navigator be informed about data changes made in the web application? Furthermore, the most server side frameworks are intended to built full stack applications which means that they are also facilitate the creation of data models, persistence, authentication and son on.
-This doesn't really match the situation, since those functionality is already implemented in the cids server respectively the new cids RESTful API which always provides a well defined interface for the client.
+Another even more important issue is that always an additional web server is required, which is responsible for data management, application logic and session management which makes the interaction with the navigator GUI more difficult.
+Just to give an example: How can the navigator be informed about data changes made in the web application? Furthermore, most server side frameworks are intended to built full stack applications which means that they also facilitate the creation of data models, persistence, authentication and so on.
+This does not really match the situation, since those functionality is already implemented in the cids server respectively the new cids RESTful API which always provides a well defined interface for the client.
 
-As already mentioned, rich user experience and interaction possibilities can only be implemented with client side technologies. Therefore it is inevitable to concentrate on client side technologies when developing web applications that shall be integrated into the navigator.
+As already mentioned rich user experience and interaction possibilities can only be implemented with client side technologies. Therefore it is inevitable to concentrate on client side technologies when developing web applications that shall be integrated into the navigator.
 
-For a long, time significant differences in the user interaction of web applications and native desktop applications exist.
-This is the reason why technologies like Adobe Flash or Java Applets came up, coining a totally new kind of web application, that should leave the drawbacks behind. With the increasing support of modern web standards such as HTML 5 , CSS3 and JavaScript in browsers, this limitation of native web applications fades away more and more. What all those technologies have in common, is that they allow to build rich internet applications, that offer the same level of user experience than native web applications. The following chapter therefore outlines and compares the different technologies that are available for building rich internet applications.
+For a long time significant differences in the user interaction of web applications and native desktop applications exist.
+This is the reason why technologies like Adobe Flash or Java Applets came up, coining a totally new kind of web application, that should leave the drawbacks behind. With the increasing support of modern web standards such as HTML 5 , CSS3 and JavaScript in browsers this limitation of web applications build upon standard web technologies fades away more and more. What all those technologies have in common is that they allow to build Rich Internet Applications, that offer the same level of user experience than normal desktop applications. The following chapter therefore outlines and compares the different technologies that are available for building Rich Internet Applications.
 
 
 \section{Rich Internet Applications}
@@ -54,52 +54,51 @@ This is the reason why technologies like Adobe Flash or Java Applets came up, co
 \subsection{Definition and Characteristics}
 
 The term Rich Internet Application (RIA) was firstly introduced by Jeremy Allaire.
-In \autocite[]{allaire_ria} he describes important characteristics of rich internet applications such as a powerful and extensible model for interactivity and using web and data services provided by application serves.
+In \autocite[]{allaire_ria} he describes important characteristics of RIAs such as a powerful and extensible model for interactivity and using web and data services provided by application serves.
 The term RIA is not standardized and there exist various definitions often with only a slight difference.
-
 
 Bozzon et al state that RIAs are  \enquote{[...] a variant of Web-based systems providing sophisticated interfaces for representing complex processes and data, minimizing client-server data transfers and moving the interaction and presentation layers from the server to the client.} \autocite[]{ria-definition-1}
  
 A good discussion on the various definitions can be found at \autocite[]{ria-state-of-the-art}.
 They conclude that there are two parts that distinguishes RIA from "normal" web applications, a technical part and the user experience.
 The technical differences are first and foremost the asynchronous data exchange with the server and the shift of application logic to the client.
-The second part comprises the fact, that RIA's look and behave more like native desktop applications, in fact they have a richer user interaction and can be used on and offline.
+The second part comprises the fact, that RIA's look and behave more like native desktop applications, in fact they have user interaction possibilities similar to desktop applications and can be used online and offline.
  
 \subsection{Technologies}
 
-There are two groups of technologies with that rich internet applications can be build and that have evolved with the progress of client side web development technologies.
-Bozzon et al \autocite{ria-classification-1} defines 4 categories of RIA technologies,scripting-based, plugin-based (Flash, Silverlight), browser-based (XUL, XAML) and web-based desktop technologies (Java Web Start).
+There are two groups of technologies with that RIAs can be build and that have evolved with the progress of client side web development technologies.
+Bozzon et al \autocite{ria-classification-1} defines 4 categories of RIA technologies, scripting-based, plugin-based (Flash, Silverlight), browser-based (XUL, XAML) and web-based desktop technologies (Java Web Start).
 A similar categorization can also be found in \autocite{ria-classification-2}.
 The definition of web-based desktop technologies like Java WebStart as a RIA technology should be called into question.
-Such applications are normal desktop applications, in case of Java Web Start Swing applications that are not executed in the browser an require a special runtime environment.
+Such applications are normal desktop applications, in case of Java Web Start Swing applications that are not executed in the browser and require a special runtime environment.
 They merely use the web as deployment mechanism but can not be regarded as web applications.
 Browser based RIA are more seldom which may be caused in the fact that they only run in a specific browser.
-Both, browser based and web-based desktop technolgies,  are not suited for building web applications that can be used in the Swing based navigator GUI and as normal web application.
+Both, browser based and web-based desktop technolgies,  are not suited for building cids web renderer and editors that can be used in the Swing based navigator GUI and as normal web application.
 
-The more interesting types are plugin-based and sripting-based RIA's.
+The more interesting types are plugin-based and scripting-based RIA's.
 Plugin-based RIA's, as the name suggest, need a special and often vendor specific browser plugin or runtime environment.
-Prominent candidates are Adobe Flash, Adobe Air, Microsoft Silverlight and JavaFX.
+Prominent candidates are Adobe Flash, Microsoft Silverlight and JavaFX.
 In \autocite[]{ria-comp-1} and \autocite[]{ria-comp-2} a good comparison of the most prominent plugin based RIA technologies can be found.
 
 There are many issues with plugin based RIA's platforms.
 The most important one is, that always an additional browser plugin is needed.
-This limits the accessibility of web application and is contradictionary with the easy and wide spread acessibility of web applications.
-Depending on the Platform it can happen that no plugin for every browser or operating system is available.
+This limits the accessibility of web application and is contrary with the easy and wide spread accessibility of web applications.
+Depending on the operating system and used browser it can happen that no plugin is available.
 And even if there is a corresponding plugin available, it can not be guaranteed that the plugin is installed.
 A good example for this are mobile devices.
 There is no support for Flash on any iOS device.
 In \autocite[]{jobs-thoughts-on-flash} Steve Jobs explain the reasons for this.
 Some of the reason he mention, can also be transferred to other plugin based RIA platforms.
 For example Jobs criticized that Flash \enquote{[...] has not performed well on mobile devices} \autocite[]{jobs-thoughts-on-flash}.
-This issue belongs to all plugin based RIA platforms and and is not strictly limited to mobile devices.
+This issue belongs to all plugin based RIA platforms in a certain degree and and is not strictly limited to mobile devices.
 They need a long time to load and initialize the application.
 In addition, there is a considerably increased security risk with one or more browser plugins installed.
 Flash in particular is well known for its security vulnerabilities.
-Last but not least, most of the above mentioned platforms are not open an doesn't belong to a web standard.
+However the most important issue is that most of the platforms plugin based RIAs are built n are not standardized.
 
 Regarding all these issues and the latest improvements in web standards such as HTML5, CSS3 and JavaScript it is not surprising that the stake of web applications that use a plugin based RIA platform has decreased rapidly in the last years.
-Figure \ref{fig:flash_usage} depicts the current usage of Flash and Silverlight and gives a back sight for the last three years.
-From special interest is the decreasing stake of Adobe Flash, hence it is the most prominent and disseminated plugin based RIA technology.
+Figure \ref{fig:flash_usage} depicts the current usage of Flash and Silverlight and gives a retrospect for the last three years.
+Of special interest is the decreasing stake of Adobe Flash, hence it is the most prominent and distributed plugin based RIA technology.
 
 \begin{figure}
 	\centering \includegraphics[width=1.0\textwidth]{./img/web-dev/flash_usage.png}
@@ -107,23 +106,28 @@ From special interest is the decreasing stake of Adobe Flash, hence it is the mo
 	\label{fig:flash_usage}
 \end{figure}
 
-The last group of RIA's are solely implemented with web standards such as HTML5, CSS and JavaScript.
-AJAX and JavaScript are the most important technologies for building web applications with a rich user interface in fact AJAX fundamentally changes the way the client communicates with the server.
+The last group of RIAs is solely implemented with web standards such as HTML5, CSS and JavaScript.
+AJAX and JavaScript are the most important technologies for building web applications with a dynamic user interface. In fact AJAX fundamentally changes the way the client communicates with the server.
 The crucial advantage is that no special plugin or runtime environment is required. 
-Scripting-based RIA's work in all standard conform web browser and on all devices.
-This ensures that they have the same accessibility like normal web applications. For the sake of completeness it is important to note that it is possible in the most browser to disable the execution of JavaScript. But the pervasive and wide spread usage nowadays. A investigation in 2013 of Yahoo regrading this topic \autocite{web-dev:js-disabled}, claims that the maximum rate measured of users with disabled JavaScript support is roughly 2 percent. Regarding those facts, it seems that this argument can be neglected.
+Scripting-based RIA's work in all standard compliant web browsers.
+This ensures that they can be accessed like every other web application. 
+For the sake of completeness it is important to note that it is possible in the most browser to disable the execution of JavaScript which has similiar disadvantages like a missing or not installed plugin when using a plugin based RIA .
+But the pervasive and wide spread usage of JavaScript nowadays, reduces the probability to a minimum. An investigation in 2013 of Yahoo regrading this topic \autocite{web-dev:js-disabled} claims that the maximum rate measured of users with disabled JavaScript support is roughly 2 percent. Regarding those facts, it seems that this argument can be neglected.
 
-The immense improvements in the last years regarding new standards like HTML 5, CSS3 and JavaScript remedy a lot of the till then valid drawbacks of scripting based RIA's.
-Just to give an example: Although they totally rely on standardized technologies, there are many differences how these standards are implemented in the different browsers, why it was often necessary to write browser depended code.
-The principal issue still exists today, but owing to the presence of frameworks that abstract from the underlying browser those problems are avoided in the most cases.
+The immense improvements in the last years regarding new standards like HTML 5, CSS3 and JavaScript remedy a lot of the until then valid drawbacks of scripting based RIA's.
+Just to give an example: Although they totally rely on standardized technologies, there are many differences how these standards are implemented in the different browsers.
+Thus it was often necessary to make browser depended adoptions.
+The principal issue still exists today, but owing to the presence of frameworks that abstract from the underlying browser those problems can be avoided in the most cases.
 Additionally, the rapid performance improvements of JavaScript engines in the last years, remedy the performance problem of pure script-based RIA's.
-Another problem of script-based applications is, that they didn't have the same level of interaction richness.
-But also this changed with the progresses that are achieved with JavaScript.
-If we regard web applications like Google Mail, Facebook and Twitter just to name a few, it is clear that it is possible to write rich web applications solely with web standards and that behave and act like native desktop applications.
-Upcoming technologies like local storage and client side data bases will even allow to develop web applications that can also be used without a connection to the internet.
+Another problem of script-based applications is that they did not have the same  interaction possibilities like desktop applications or plugin based RIAs.
+But also this changed with the progress achieved in the more recent past.
+If we examine web applications like Google Mail, Google Maps, Facebook and Twitter just to name a few it is clear that it is possible to write dynamic and highly interactive web applications solely with standardized web technologies and that behave and act like native desktop applications.
+Upcoming technologies like local storage and client side databases will even allow to develop web applications that can also be used without a connection to the internet.
 Web Sockets will allow a bi-directional communication between the server and the client that can also be originated from the server and Web Workers will extend JavaScript with an asynchronous execution model.
 Summing up, scripting based RIA's seems to be the most suitable approach for building web applications that can be integrated into the navigator. 
-They offer a fairly good level of interactivity and the simple architecture will not additionally complicate the data exchange with the navigator. 
+They offer a fairly good level of interactivity and the simple architecture will not additionally complicate the data exchange with the Navigator. 
+
+\todo{Make a table that summarizes the conclusion}
 
 As already mentioned there are many efforts in building JavaScript frameworks and libraries that shall facilitate the development of rich JavaScript and HTML5 based web applications.
 In the last year, a new emerging trend in that sector are frameworks that use the MVC pattern to structure the code, keep it maintainable and increase the development productivity.
@@ -135,23 +139,24 @@ The next chapter however, shall give a more conceptual overview over these new k
 
 Modern JavaScript Frameworks like AngularJS, Ember and Knockout try to structure the code by using architectural patterns like MVC.
 In order of doing this, they achieve a separation of presentation logic, business logic and presentation state.
-Furthermore this seperation of concerns help developers to understand the framework much faster and get more comfortable with the it hence the used patterns provides them with a well known mental model.
+
+This seperation of concerns and the fact that the used patterns provides developers with a mental model, it is much easier for developers to work with the framework.
 Unfortunately not all frameworks use the classical MVC pattern as it is defined in \autocite[]{smalltalk_mvc}.
-Some of them use slightly variants of this pattern like MVVM (Model-View-ViewModel or MVP (Model View Presenter).
+Some of them use slightly variants of this pattern like MVVM (Model-View-ViewModel) or MVP (Model View Presenter).
 Knockout for example uses the MVVM pattern to enable a loose coupling of the domain model and the view (cf.
 \autocite{heise_knockout}).
  
 The usage of the different pattern variations often lead to discussions of the various advantages and disadvantages of the used pattern and shifted the focus away from the frameworks itself.
-But in fact all of the used patterns basically entail the same advantages, an Angular developer introduced the term MVW.
-In he argues \enquote{Having said, I'd rather see developers build kick-ass apps that are well-designed and follow separation of concerns, than see them waste time arguing about MV* nonsense.
+But as all of the used patterns basically comprise the same advantages, an Angular developer introduced the term MVW.
+In \autocite{anguler_mvw} he argues \enquote{Having said, I'd rather see developers build kick-ass apps that are well-designed and follow separation of concerns, than see them waste time arguing about MV* nonsense.
 And for this reason, I hereby declare AngularJS to be MVW framework - Model-View-Whatever.
 Where Whatever stands for "whatever works for you".} \autocite[]{anguler_mvw}.
 This opinion finds more and more acceptance.
 
 Another important feature that can be seen as a key concept of the new frameworks is automatic (two way) data binding between the model and the view.
 This means that it is possible to bind UI elements like text, or input fields to properties of the correlating model.
-Changes in the UI, for example user input, is automatically reflected to the model property, and programmatically changing the property updates the user interface.Figure \ref{fig:data-binding} demonstrates this.
-This is an immense advancement in contrast to more ancient frameworks in fact the developer isn't responsible to write and test code for that purpose by hand or need to ensure manually that changes are reflected.
+Changes in the UI, for example user input, is automatically reflected to the model property, and programmatically changing the property updates the user interface. Figure \ref{fig:data-binding} shows this.
+This is an immense advancement in contrast to more matured frameworks in fact the developer is not responsible to write and test code for that purpose by hand or need to ensure manually that changes are reflected.
 While there are multiple ways to achieve this, there are mainly two different approaches how the two way data binding is implemented.
 A good and detailed examination of those implementations can be found in \autocite[]{binding_comparison}.
 One approach is to use special JavaScript objects on the model site that are able to notify observers (the view) about changes.
@@ -168,21 +173,21 @@ The two approaches have some fundamental consequences that are discussed into mo
 	\label{fig:data-binding}
 \end{figure}
 
-Very closely related to the two way data binding feature is the usage of template engines in modern JavScript MVC frameworks.
+Very closely related to the two way data binding feature is the usage of template engines in modern JavaScript MVC frameworks.
 Templates support the developer in separating style and design from application and business logic.
 Furthermore they make it unnecessary to programmatically generate html markup.
-The template consists of html markup and some further place holders or variables where the final data gets inserted.
+The template consists of html markup and some further place holders or variables where the actual data will be inserted.
 
 The template engines differ in the possibilities to integrate logic inside the templates.
-Some allow full and arbitrary JavaScript logic, other a small set of constructs offered by the template engine itself, like loops, conditionals or partials.
-The latter approach is the one that is mostly used, hence using arbitrary JavaScript in the templates is contrast with the initial idea of separating html markup and application logic.
+Some allow full and arbitrary JavaScript logic while others offer a small set of constructs defined by the template engine, like loops, conditionals or partials.
+The latter approach is the one that is mostly used because using arbitrary JavaScript in the templates is in contrast with the initial idea of separating html markup and application logic.
 
-Shifting the application logic to the client and only fetching data from the client creates also some new problems.
-Hence the total application is loaded with the first request, no entries are added to the browsers history during the usage of the web application.
+Shifting the application logic to the client and only fetching data from the server creates also some new problems.
+The total application is loaded with the first request and no entries are added to the browsers history during the usage of the web application.
 This destroys the browsers history and with it important functions like using the back and forward button or bookmarking certain states of the application.
-This problem leads us the next core component that most of the modern frameworks provide, the routing mechanism.
+This problem leads us the next core concept that most of the modern frameworks provide, the routing mechanism.
 Routing means that the different states of the application are mapped into an URL that can be used for the browsers history.
-The mostly used approach nowadays is, to use the \enquote{\#} fragment identifier of the URL (cf. \autocite{spi_manifesto}).
+The most common approach nowadays is to use the \enquote{\#} fragment identifier of the URL (cf. \autocite{spi_manifesto}).
 The fragment identifier usually refers to an HTML element id or a named anchor in the current page and allows to automatically scroll to the position of that HTML element.
 Current JavaScript frameworks use the fragment identifier to track the state of the application and the router components are responsible for turning the fragment identifier part of the URL to the right application state.
 
@@ -193,9 +198,9 @@ Current JavaScript frameworks use the fragment identifier to track the state of 
 \end{figure}
 
 Using the fragment identifier for tracking application state is highly controversial.
-There are a lot of blog posts and comments that discusses this approach (cf.
+There are a lot of blog posts and comments that discuss this approach (cf.
 \autocite[]{hashbang_urls_1},\autocite[]{hashbang_urls_2},\autocite[]{hashbang_urls_3}).
-To put the discussion in a nutshell the main arguments against this approach are, that it changes the target of the url, hence the fragment identifier is not send to the server, and only clients with JavaScript enabled can interpret these kind of URLs.
+To put the discussion in a nutshell the main arguments against this approach are that it changes the target of the url hence the fragment identifier is not send to the server and only clients with JavaScript enabled can interpret these kind of URLs.
 Using hash-bang URLs was the only possibility for tracking state in client side JavaScript applications.
 Fortunately the upcoming HTML 5 standard contains a new part, the History API \autocite[]{w3c-history-api}, that allows the browser to modify the current URL and the browser history programmatically.
 The History API offers a new way for tracking application state without using hash-bang URLs and the related drawbacks.
@@ -210,8 +215,8 @@ Angular for example already offers the possibility to already use the History AP
 \end{figure}
 
 Another problem that comes up using JavaScript driven web applications is that they can't be analysed from search engines as easily as server centric web applications because the initial page request doesn't return a HTML document that contains the important content directly.
-But also for this drawback certain technologies exists, that remedy this disadvantage.
-The first on was announced from Google in 2009.
+But also for this drawback certain technologies exists that remedy this disadvantage.
+The first one was announced from Google in 2009.
 In \autocite[]{google_AJAX_crawling} they announce a method to crawl hash-bang URLs.
 The main idea is that the crawler maps the hash-bang URL into an normal URL that contains the fragment identifier.
 Figure \ref{fig:google_crawling_ajax} depicts the idea.
