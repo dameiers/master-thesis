@@ -21,12 +21,11 @@ Furthermore, the server components are responsible for managing users, user-grou
  
 The yellow building block in Figure \ref{fig:cids_building_blocks} represents the client side of the cids platform, the cids Navigator and its main components.
 It is the default client for user interactions with the system.
-Among other things, the cids Navigator conjuncts information of the distributed server network and provides it to the user in a user-specific tree view the so called catalogue.
+Among other things, the cids Navigator collects information from the distributed server network and provides it to the user in a user-specific tree view, the so called catalogue.
 For every object in the catalogue exists a so called cids renderer and editor.
 A cids renderer provides a graphical user interface for the visualisation of object related information in a user friendly way whereas the cids editor also allow the user to edit these information.
 
-
-Just for the sake of completeness, the last building block consists of a set of management tools, that ``support system managers during the installation and maintenance'' \autocite[]{cismet-cids-readMe} of cids based systems but are less important for the following considerations.
+Just for the sake of completeness, the last building block consists of a set of management tools, that ``support system managers during the installation and maintenance'' \autocite[]{cismet-cids-readMe} of cids based systems but are not important for the following considerations.
 
 Up to now, the cids product suite, which is totally Java based, is not able to offer its services and features to other applications.
 Especially the lack of building web applications that uses cids server functionality is a more and more growing issue regarding the increasing importance of the internet and its more widespread and pervasive usage nowadays.
@@ -40,9 +39,9 @@ Those data could be post-processed with the already existing cids Navigator in a
 The rehashed data (or just an interesting subset of it) can then be accessed with the same or an additional web application.
 Regarding this example in more detail, it is obvious that such web applications have the same  purpose as the already existing Swing based object renderer.
 
-The similar functionality of such HTML applications and Swing based renderer and editors in the Navigator offer the chance to use those web applications as a replacement for the Swing based editors.
+The similar functionality of such web applications and Swing based renderer and editors in the Navigator offer the chance to use those web applications as a replacement for the Swing based editors.
 This has the benefit of avoiding development costs for additional Swing components if a web application with the same purpose is needed anyway.
-Thinking one step ahead, it is also imaginable that renderer and editors are solely realized as HTML applications hence this offers the advantage of a much easier and more spreaded accessibility. 
+Another benefit when realizing render and editors solely with web technologies is the much more spreaded accessibility of web applications for example on mobile devices. 
 Furthermore, the very narrow functionality of the cids RESTful server API, due to its very early stage of development, interferes initial efforts in web application development.
  
 % ToDo: make this nice and filthy
@@ -52,25 +51,25 @@ A seamless integration of those HTML widgets in the cids Navigator is needed.
 
 \section{Objectives}\label{chap:intro-objectives}
 
-Up to now the cids Navigator is not able to visualise HTML applications as cids object renderer and editors.
+Up to now the cids Navigator is not able to visualise web applications as cids object renderer and editors.
 This feature is inevitable for the above mentioned reasons.
 Thus, the cids Navigator needs to be extended with the respective functionality.
 One objective of the presented work is the conceptual design and technical realisation of this feature.
 Without going into great detail, it is obvious that this task requires a software component, that is able to parse and visualise HTML documents similar to existing web browsers.
-Furthermore, it is necessary to develop a simple web application that can act as cids renderer / editor for a cids object which simplifies testing and can act as a demo application.
+Therefore an examination on different software components with a respective functionality is given.
+Furthermore, it is necessary to develop a simple web application that can act as cids renderer and editor for a cids object which simplifies testing and can act as a demo application.
 The development of such an first web application is the second objective of this work.
 
 Although it is imaginable (and with the outlined feature quite possible) to use and visualise arbitrary and already existing web applications as cids renderer and editor it is not clear if the integration of such \enquote{legacy} applications is reasonable.
 Hence the web application is embedded in the Swing based Navigator GUI, it is important to focus on user experience and usability to allow a preferably seamless integration.
-We must ensure that the web application offers GUI elements and interaction possibilties similiar to Swing so that the user can not recognize that the different parts are implemented with different technologies.
+It must be ensured that the web application offers GUI elements and interaction possibilities similar to Swing so that the user can not recognize that the different parts are implemented with different technologies.
 Much more important is that the web application needs to interact with the Navigator GUI, because some events in the Swing GUI can have effects on the web application and vice versa.
-For example if an object in the Navigator catalogue tree is selected, the web application needs to know which object was selected to offer the proper information.
-
-It seems that the usage of custom developed web applications that regard the usage within the Navigator GUI  is  necessary, hence they allow a seamless integration.
-An appropriate technology for building such applications is needed.
-Therefore the last objective is to examine the state of the art in web development and web technologies , with a special focus on the capabilities of building rich internet applications (RIAs).
+For example, if an object in the Navigator catalogue tree is selected the web application needs to know which object was selected to offer the proper information.
+It seems that the usage of custom developed web applications that regard the usage within the Navigator GUI is the more appropriate solution, hence they allow a seamless integration. From now, on those web applications are called cids web renderer and editor components to allow a better distinction from arbitrary web applications. 
+A technology for building cids web renderer and editor components is needed.
+Therefore the last objective is to examine the state of the art in web development and currently existing web technologies, with a special focus on the capabilities of building rich internet applications (RIAs).
 In short, a RIA is a web application that behaves like an native desktop application.
-This examination shall reveal a framework that can be used to build web applications for developing web applications that can act cids render and editors and can be seamlessly integrated into the cids Navigator.
+This examination shall reveal a framework that can be used to build web applications for developing web applications that can act as cids render and editors and can be seamlessly integrated into the cids Navigator.
 
 Regarding these objectives, the thesis has the following structure: In the next chapter, the theoretical fundamentals of rich internet applications and the state of the art in developing RIAs is given.
 Chapter \ref{chap:conception} outlines the conceptual design of the new feature \enquote{HTML applications as cids renderer and editors} and defines requirements for necessary third party web browser components and JavaScript frameworks.
