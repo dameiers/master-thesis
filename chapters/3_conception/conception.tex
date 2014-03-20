@@ -6,7 +6,7 @@ However an own implementation would be totally out of the scope if this work. It
 This chapter lists and explains requirements for candidate components and API's.
 Based on these requirements the examination of the various candidates is done in chapter \ref{chap:browser_api_comparison}.
 
-Another objective of this work is to evaluate a modern JavaScript APIs for a company wide use in general and for the development of a demo web application in particular.
+Another objective of this work is to evaluate modern JavaScript APIs for a company wide use in general and for the development of a demo web application in particular.
 Hence this chapter also outlines requirements that can be used for the evaluation in chapter \ref{chap:detail_comparison}.
 
 \section{Overview}
@@ -27,7 +27,7 @@ Figure \ref{fig:desc_panes} depicts an example catalogue and different contents 
 	\label{fig:desc_panes}
 \end{figure}
 
-Cids renderers are responsible for offering the user a graphical user interface that renders all the related information of the specific object node that is selected in the cids catalogue.
+Cids renderer are responsible for offering the user a graphical user interface that renders all the related information of the specific object node that is selected in the cids catalogue.
 The type of the renderer that is used is determined on a per-class basis.
 The renderer only allows the visualisation of information, while editing those information is offered by cids editors.
 Cids editors are placed in a different panel within the cids navigator.
@@ -54,34 +54,27 @@ Furthermore, the current Swing implementation also injects the data into the ren
 Following the above mentioned approach would stand in contrast with the current implementation and would cause more changes in the current implementation of the Navigator.
 
 In contrast the Navigator could ship the information to the web application.
-This would avoid the problem that the web application can not recognize when the user has selected an object in the catalogue and would better reflect the current implementation..
+This would avoid the problem that the web application can not recognize when the user has selected an object in the catalogue and would better reflect the current implementation.
 As mentioned above, if a object node gets selected the navigator loads the corresponding renderer component and injects the currently selected object into it.
 Transferring the same approach to web applications would therefore cause less implementation changes in the Navigator.
 The question is how can the Java based navigator inject data into the web application? 
 
-\todo{refactor this paragraph}
 One solution is to parametrize the URL that is used to retrieve the web application with the relevant information.
-Using this approach requires that the web application is hosted by a web server, which is not necessary in every case.
-If the web application does not need any server side processing it is also possible that the web application can be packed in one of the jar files necessary to run the Navigator application.
-Furthermore additional logic on server side is required to process the URL encoded data.
-Much more critical is, that the relevant information of the selected navigator object needs to be encoded into URL.
-This encoding has some limitations.
-First, it is not possible to encode binary data for example.
-This can not be excluded hence in WuNDa for example already renderer exists that also need to visualise binary data like pdf documents or images.
-Another problem is that the information that needs to be encoded can be very large and can have a complex structure.
-Although the RFC \autocite{conception:rfc-uri}  does not limit the length of an URL, there are practical limitations depending on the browser and web server used (cf. \autocite{conception:uri-length}).
-Additionally, using this approach would also complicates the reuse in other contexts.
-
+The drawback of that approach is that the information of the selected Navigator object needs to be encoded into the URL.
+Since the information that needs to be encoded can be very large it can happen that the URL exceeds a maximum length.
+Although the corresponding RFC \autocite{conception:rfc-uri}  does not limit the length of an URL, there are practical limitations depending on the browser and web server used (cf. \autocite{conception:uri-length}).
 The second option is, that the Navigator injects the selected object on client side, when the web renderer or editor component gets loaded.
 This requires the Navigator to be able to execute JavaScript code within the context of the web renderer or editor component and that the web renderer or editor component can make method calls to Java.
 Fortunately both ways are possible with the Java Scripting API \autocite{conception:rhino}.
-Since a third party browser component is used to render web applications in the Navigator the browser component offers an interface for communicating with the JavaScript environment of the loaded web application and vice versa.
+Since a third party browser component is used to render web applications in the Navigator, the browser component must offer an interface for communicating with the JavaScript environment of the loaded web application and vice versa.
 
-Web renderer and editor components that shall be integrated in the Navigator are wrapped with some JavaScript logic that retrieves the data that should be displayed.
-This simplifies the reuse in any other web application hence only this part of the application needs to be adopted.
-	
-Another basic advantage of using web applications as cids renderer is that they can be reused when building web based information systems that make use of cids features and the new cids REST API.
+%If wrapping the web renderer and editor components that shall be integrated in the Navigator with some JavaScript logic that retrieves the data that should be displayed it is easy to reuse.
+%This simplifies the reuse in any other web application hence only this part of the application needs to be adopted.
+
+Another basic advantage of using web applications as cids renderer is that they can be reused when building web based information systems that make use of cids features and the new REST API.
 Therefore, it shall be possible to reuse the developed web applications with as low effort as possible.
+
+\todo{mention the requirement that it shall be possible to use one code base for renderer and editor}
 
 Last but not least, the effort for the configuration which objects should use an web application as cids renderer shall be as small as possible.
 
@@ -157,26 +150,26 @@ It allows to integrate the web application in a certain package within the sourc
 \section{Requirements}\label{chap:requirements}
 \subsection{Requirements for Java Browser API}
 
-To integrate modern web applications in the cids navigator as object renderer and object editors candidate components or API's should provide as many of the following functionality as possible:
+To integrate modern web applications in the cids navigator as object renderer and object editor candidate components or APIs should provide as many of the following functionality as possible:
 
-The most important requirement regarding the Java browser component is, that it must be able to execute JavaScript.
+The most important requirement regarding the Java browser component is that it must be able to execute JavaScript.
 This is necessary since it shall display JavaScript based Rich Internet Applications implemented with a modern JavaScript MVC framework as discussed in chapter \ref{chap:web_dev}.
 Furthermore, the candidate component needs to offer an interface for executing JavaScript code in the context of the loaded web application and vice versa.
-As discussed above this is the preferred way for the necessary data exchange between the cids navigator and the  loaded web application.
+As mentioned above this is the preferred way for the necessary data exchange between the cids navigator and the  loaded web application.
 
 Another important requirement is the support of the latest web standards such as HTML5 and CSS 3.
 Hence both technologies stand for a group of different standards, every single one with a different status and not even finished, it is impossible to make any quantitative statement about the support of both standards.
-Nonetheless there are different test tools available that can at least be used as an indicator for the support of new HTML and CSS features.
+Nonetheless, there are different test tools available that can at least be used as an indicator for the support of new HTML and CSS features.
 
-The last mandatory requirement regards the licensing of the candidate components.
+The last mandatory requirement concerns the licensing of the candidate components.
 The cids navigator is developed under the GPL license which has strong copyleft conditions.
 Therefore, the candidate components licensing must be compatible with the GPL license.
 
-Besides these mandatory requirements there are also some less obligatory issues candidate API should fulfil.
-For example an important issue is how good the API is documented.
-It is an big advantage if there are developer guides, tutorials or code examples that explain the usage and ensure an easy start and usage of the candidate API.
-Closely related to this, is the community and the support that is provided if any problems during the usage occur.
-Also relevant is, if there is a bug tracker system or a forum where individual problems can be posted and how responsive the developers or the community react on such issues.
+Besides these mandatory requirements there are also some less obligatory issues candidate APIs should fulfil.
+For example an important issue is how well the API is documented.
+It is a big advantage if there are developer guides, tutorials or code examples that explain the usage and ensure an easy start and overall usage of the candidate API.
+Closely related to this is the community and the support that is provided if any problems during the usage occur.
+It is also relevant, if there is a bug tracker system or a forum where individual problems can be posted and how responsive the developers or the community react on such issues.
 
 The following table summarizes the various requirements and depicts what requirements are inevitable for a possible use and what requirements are optional.
 
@@ -186,17 +179,17 @@ The following table summarizes the various requirements and depicts what require
 \begin{tabulary}{\textwidth}{|l|C|c|}
  \hline 
 \rowcolor{gray}
-  \head{Requirement} & \head{Comment} & \head{Mandatory} \tabularnewline
+  \head{Requirement} & \head{Comment} & \head{Priority} \tabularnewline
  \hline
-CSS 3 Support & as far as possible & yes \\
-HTML5 Support & as far as possible & yes  \\
-JavaScript Support & & yes \\
- Bi directional communication & & yes \\
-GPL compatible license & & yes \\ \hline
-fast on rendering & & no\\
-documentation & & no\\
-support & & no \\
-community & &no \\
+CSS 3 Support & as far as possible & high \\
+HTML5 Support & as far as possible & high  \\
+JavaScript Support & as far as possible & high \\
+ Bi directional communication & & high \\
+GPL compatible license & & high \\ \hline
+fast on rendering & & middle\\
+documentation & & low\\
+support & & low \\
+community & &low \\
  \hline 
  \end{tabulary}
  \captionof{table}{Requirements for Java Browser Components and API's}
@@ -204,41 +197,43 @@ community & &no \\
 
 \subsection{Requirements for JavaScript MVC Frameworks}
 
-For the evaluation of JavaScript MVC frameworks it is also necessary to define requirements, candidate frameworks should fulfil as good as possible.
+For the evaluation of JavaScript MVC frameworks it is also necessary to define requirements candidate frameworks should fulfil as good as possible.
 
 The different requirements can be classified into four groups which concerns different aspects.
-The four classes concerns the ease and speed of development,flexibility, stability and performance and legal requirements.
+The four classes concerns the ease and speed of development, flexibility, stability and performance and last but not least legal requirements.
 
-The first category, ease and speed up of development, concerns to the general idea why a framework is used in general, and therefore is the most important one.
+The first category, ease and speed of development, concerns to the general idea why a framework is used in general and therefore is the most important one.
 The framework should reduce the amount of boilerplate code to a minimum.
-Especially important in that relation is that the framework supports two-way-data binding between the model and the view.
-This is a quite essential feature when developing cids render and editors, hence the data visualisation and manipulation is the most fundamental task of them.
-Furthermore, it is a benefit, if the framework provides tools for testing and debugging the developed application.
+Especially important is that the framework supports two-way-data binding between the model and the view.
+This is a quite essential feature when developing cids renderer and editors, hence the data visualisation and manipulation is the most fundamental task of them.
+Furthermore, it is a benefit if the framework provides tools for testing and debugging the developed application.
 Another crucial factor that influences the ease of development is the quality and the  extend of the documentation as well as the size and activity of the community or the support that is offered by the framework developers.
-All these factors can simplify or complicate the development with the framework, especially if the framework is not very matured and shall be initially introduced.
+All these factors can simplify or complicate the development with the framework, especially if the framework is not very matured.
 
-Regarding the next category, the flexibility of the framework, the most important requirement to mention is, that the framework should not limit the set of GUI elements that can be used in any way.
+Regarding the next category, the flexibility of the framework, the most important requirement to mention is that the framework should not limit the set of GUI elements that can be used in any way.
 The Google Web Toolkit \autocite{conception:gwt} is a good example for this.
 For example it is not possible to easily use an arbitrary JavaScript based date picker component or slide show.
-Previous experiences in web development projects where GWT was involved has proven that this is a major drawback and should therefore be avoided.
+Previous experiences of the cismet company in web development projects where GWT was involved has proven that this is a major drawback and should therefore be avoided.
 The second requirement concerns a more general issue.
-Although the candidate framework should support the user in many tasks as possible and hence eases the development, but it should also allow alternatives way to achieve the same goal.
-A good example for this is the routing mechanism of the framework.
+Although the candidate framework should support the user in many tasks as possible and hence eases the development, it should also allow alternatives ways to achieve the same goal.
+A good example for this is the routing mechanism of a framework.
 Although it is useful if the framework already provides a way to support routing, it should not prevent the user from using a third party library for this purpose which can be more suited.
 
 Another group of requirements concern the stability and performance of the candidate frameworks.
-A very common problem when developing JavaScript applications is the creation of memory leaks, hence there is no global garbage collector.
-The frameworks itself must ensure that the creation of memory leaks is prevented when building applications based on them.
+A very common problem when developing JavaScript applications is the creation of memory leaks, because there is no global garbage collector.
+The frameworks itself must ensure that the creation of memory leaks is prevented when building applications based on them. It is clear, that the developer itself has to ensure that the code he produces does not produce memory leaks. But when using a framework, the developer builds the application on top of the framework an can not influence the behaviour and stability of the framework itself.
 Furthermore also the performance of the framework is a key factor.
-Owing to the short time since MVC frameworks came up and the speed of development in this sector, the maturity of the framework as well as the future support and continuous development of the framework are also important.
+Owing to the short time since MVC frameworks came up and the speed of development in this sector the maturity of the framework as well as the future support and continuous development of the framework are also important.
 
-MVC frameworks often provide solutions for features that are not possible today, but whose are already in the standardisation process.
-For example they provide mechanism to get notified about changes in JavaScript objects.
-A corresponding feature that will be integrated in the next version of the ECMAScript standard is the Object.observer() feature.
-Another example is the upcoming web components standard, which simplifies the development of reusable components, also a feature many MVC frameworks offer already today.
-To guarantee a long life-cycle of the developed applications it is important that the candidate frameworks makes transparent, how they plan to support such upcoming standards.
+MVC frameworks often provide solutions for features that are not possible today but that are already in the standardisation process.
+For example, they provide mechanism to get notified about changes in JavaScript objects.
+A corresponding feature that will be integrated in the next version of the ECMAScript standard is the Object.observe() feature.
+Another example is the upcoming web components standard which simplifies the development of reusable components.
+This is also a feature many MVC frameworks offer already today.
+To guarantee a long life-cycle of the developed applications it is important that the candidate frameworks make transparent how they plan to support such upcoming standards.
  
-Finally the last requirement concerns the licence of the framework again and similar to the Java web browser API, the framework licence need to be compatible with the GPL.
+Finally, the last requirement concerns the licence of the framework.
+Similar to the Java web browser API, the framework licence need to be compatible with the GPL.
 Table \ref{tab:req_mvc_frameworks} gives an overview over the requirements.\\
 
 \begin{minipage}{\linewidth}
@@ -247,37 +242,37 @@ Table \ref{tab:req_mvc_frameworks} gives an overview over the requirements.\\
 	\begin{tabulary}{\textwidth}{|L|L|C|}
 		\hline 
 		\rowcolor{gray}
-		\head{Requirement} & \head{Comment} & \head{Mandatory} \tabularnewline		
+		\head{Requirement} & \head{Comment} & \head{Priority} \tabularnewline		
 		\hline
 		\tablesection{Speed and Ease of Development}\\
  		\hline
-		Two-way data binding&  & yes\tabularnewline
+		Two-way data binding&  & high\tabularnewline
 		\hline
-		Reduce boilerplate code & & yes \tabularnewline
+		Reduce boilerplate code & & high\tabularnewline
 		\hline
-	 	Debugging \& test & are there tools available for debugging and does the framework provide a test concept & no\tabularnewline
+	 	Documentation & a good quality and extend of the documentation is needed & middle\tabularnewline
+	 	\hline
+	 	Debugging \& test & are there tools available for debugging and does the framework provide a test concept & low\tabularnewline
 	  	\hline
-	 	Documentation & a good quality and extend of the documentation is needed & no\tabularnewline
-	  	\hline
-	 	Community & is a bug tracking system and forums available, size and responsiveness of the community & no\tabularnewline
+	 	Community & is a bug tracking system and forums available, size and responsiveness of the community & low\tabularnewline
 		\hline
 	 	\tablesection{Flexibility}\tabularnewline
  		\hline
-    		GUI elements & The framework should \emph{not} limit the GUI elements to a strict set & yes\tabularnewline
+    		GUI elements & The framework should \emph{not} limit the GUI elements to a strict set & high\tabularnewline
     		\hline
-		Opinionated & the framework should ease the default case but \emph{not} limit special adoptions & yes\tabularnewline
+		Opinionated & the framework should ease the default case but \emph{not} limit special adoptions & middle\tabularnewline
 		\hline
 	 	\tablesection{Stability \& Performance}\tabularnewline
  		\hline
-		Memory leak preventions & & no \tabularnewline
+		Memory leak preventions & & middle \tabularnewline
 	 	\hline
-		Performance &  & no\tabularnewline
+		Performance &  & middle\tabularnewline
 	 	\hline
-		Future standard support& are adoptions to future web standards planned and how transparent is this for the user & no\tabularnewline
+		Future standard support& are adoptions to future web standards planned and how transparent is this for the user & middle\tabularnewline
 		\hline
 	 	\tablesection{Legal Requirements}\tabularnewline
  		\hline
-		License & license must be compatible with GPL & yes\tabularnewline
+		License & license must be compatible with GPL & high\tabularnewline
  		\hline
  	\end{tabulary}
  \captionof{table}{Requirements for JavaScript MVC Frameworks}
