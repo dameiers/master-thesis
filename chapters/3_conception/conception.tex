@@ -75,6 +75,10 @@ Another basic advantage of using web applications as cids renderer is that they 
 Therefore, it shall be possible to reuse the developed web applications with as low effort as possible.
 
 \todo{mention the requirement that it shall be possible to use one code base for renderer and editor}
+The difference between an renderer and an editor is the simple fact, that the editor offer the user the chance to edit the information of the corresponding object. 
+In the most cases, the graphical user interface does not differ. 
+The editor must simply ensure that no information can be edited, which can be easily reached when disabling all input elements like text fields, combo boxes, lists and so on. 
+This offers the chance to use the same code basis for renderer and editors and is already heavily used in when developing Swing based renderer and editors.
 
 Last but not least, the effort for the configuration which objects should use an web application as cids renderer shall be as small as possible.
 
@@ -148,7 +152,7 @@ This approach avoids assumptions on the storage and offers a high flexibility.
 It allows to integrate the web application in a certain package within the sources as well as the integration of legacy applications which is one of the requirements defined in the chapter before.
 
 \section{Requirements}\label{chap:requirements}
-\subsection{Requirements for Java Browser API}
+\subsection{Requirements for Java Browser API}\label{chap:conception_section:req-broser-api}
 
 To integrate modern web applications in the cids navigator as object renderer and object editor candidate components or APIs should provide as many of the following functionality as possible:
 

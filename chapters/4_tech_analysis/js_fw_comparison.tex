@@ -2,14 +2,14 @@
 
 \subsection{Overview}
 
-There is a huge and steadily increasing amount of new JS MVC frameworks.
+There is a huge and steadily increasing amount of new JavaScript MVC frameworks.
 A good overview over existing projects is provided by the Todo MVC App \enquote{tech-ana:todo-mvc}.
-The Todo MVC app was created with the intention to help developers selecting a JavaScript framework, by providing implementations of the very simple and ever same ToDo App, which allows to define a set of tasks that can be marked as done or undone.
+The Todo MVC app was created with the intention to help developers selecting a JavaScript framework by providing implementations of the very simple and ever same ToDo App, which allows to define a set of tasks that can be marked as done or undone.
 
 %The application allows to add/delete/edit todo tasks and to mark/unmark tasks as done/undone.
 
 The TodoMVC app gives also a good evidence of the rapid increase of existing JavaScript MVC frameworks.
-Figure \ref{fig:todoMvcComp} shows a screenshot of the ToDoMVC taken at two different dates with a period of a year.
+Figure \ref{fig:todoMvcComp} shows a screenshot of the ToDoMVC taken at two different dates within a period of more than a year.
 
 \begin{figure}
 	\centering	\includegraphics[width=1.0\textwidth]{./img/tech-ana/todo_mvc_app_comparison.png}
@@ -21,16 +21,16 @@ The large amount of different frameworks makes it impossible to examine them all
 Therefore a two step approach to filter the best suiting candidate is applied.
 In a first step a very rough comparison of the frameworks is made to filter out the most inappropriate frameworks.
 The remaining frameworks are then examined in more detail in chapter \ref{chap:detail_comparison}.
-Furthermore a simple application is implemented with each framework that is selected for the detailed comparison to get a better understanding of th concepts used there.
-The implemented application is a Simple Greeting Application where a user can edit its first and last name and sees a greeting. 
-It is obvious that the complexity of this demo application is not sufficient to demonstrate the powerfulness of the frameworks or to compare them. But it allows first impressions of the concepts that are used, and how effectively writing boilerplate code is avoided.
+Furthermore a simple application is implemented with each framework that is selected for the detailed comparison to get a better understanding of the concepts used there.
+The implemented application is a Simple Greeting Application where a user can edit its first and last name and then sees a greeting. 
+It is obvious that the complexity of this demo application is not sufficient to demonstrate all strenghts of the frameworks or to compare them. However it gives a first impressions of the concepts that are used and how effectively writing boilerplate code is avoided.
 
 %The implemented application is a simple cids renderer for an example vermessungriss bean taken from wunda.
 %This example was choosen since such renderer are one part that will be implemented in future.
    
-The following list shows relevant JS MVC frameworks taken from the ToDoMVC app.
+The following list shows relevant JS MVC frameworks taken from the Todo MVC app.
 The list only contains frameworks which are available in a stable release (at least 1.0.0) and available under a GPL compatible license.
-The TodoMVC App also lists combinations of different frameworks which are also excluded in the following list.\\
+The Todo MVC app also lists combinations of different frameworks which are also excluded in the following list.\\
 
 \begin{itemize}
 \begin{minipage}{0.5\textwidth}
@@ -49,65 +49,65 @@ The TodoMVC App also lists combinations of different frameworks which are also e
 	\item Knockout JS
 	\end{minipage}
 \end{itemize}
-
+\\
 
 Dojo as well as YUI (Yahoo! User Interface) are not MVC frameworks in the proper meaning of an MVC Framework.
-Similar to JQuery , they are rather DOM/Ajax wrapping libraries which is a more suitable description for those frameworks.
-Both has several additional features like UI-elements, effects and animations.
-Both doesn't provide components that implement MVC pattern and don't provide the user with built in features like data binding, templating or routing and are therefore not taken into further considerations.
+Similar to JQuery they rather are DOM/Ajax wrapping libraries which is a more suitable description for those frameworks.
+Both have several additional features like UI-elements, effects and animations.
+Both do not provide components that implement MVC pattern and do not provide the user with built in features like data binding, templating or routing and are therefore not taken into consideration any further.
 
 CanJS, Soma.js and Maria are very new MVC Frameworks all providing a different set of features and a different emphasis.
-According to \autocite{tech-ana:canJS-presentation} CanJS combines the best features of lightweight frameworks like BackboneJS, which are easy to learn and have a small size, as well as of heavy frameworks like EmberJS which offer a lot of good features like live binding,computed properties and memory safety.
-CanJS can use EJS or Mustache as templating engines which are both string based templating engines.
+According to \autocite{tech-ana:canJS-presentation} CanJS combines the best features of lightweight frameworks, like BackboneJS which are easy to learn and have a small size, as well as of heavyweight frameworks, like EmberJS which offer a lot of useful features like live binding or computed properties.
+CanJS can use EJS or Mustache as templating engines which are both string based.
 In one sentence CanJS can be characterized through its high performance, its memory leak prevention and the fact that it can be used with a lot of different DOM libraries.
 
-Although soma.js can be used as a MVC framework, the basic idea behind soma.js is a more general and architectural approach.
-"soma.js  provides tools to create a loosely-coupled architecture broken down into smaller pieces." \autocite{tech-ana:somaJS} In order to do so, it implements a large set of different design patterns, like dependency injection, observer pattern or mediator pattern and the MVC pattern.
-Soma.js implements its own template engine based on soma.js.
+Although soma.js can be used as a MVC framework the basic idea behind soma.js is a more general and architectural approach.
+"soma.js  provides tools to create a loosely-coupled architecture broken down into smaller pieces." \autocite{tech-ana:somaJS} In order to do so it implements a large set of different design patterns, like dependency injection, observer pattern or mediator pattern and the MVC pattern.
+Soma.js implements its own template engine, soma-template.
 The more architectural bias makes it less comfortable for the developer to work with soma.js since a lot of work needs to be done manually that other frameworks do automatically.
 
 The authors of Maria emphasize that the framework implements the "real" MVC pattern.
-Maria is a very lightweight framework which means that there is no built in support for templates and data binding.
+Maria is a very lightweight framework which has the effect that there e.g. is no built in support for templates and data binding.
 Similarly to soma.js, working with Maria means to write a lot of boilerplate code.
 
-Generally speaking, the biggest problem with the above mentioned very young frameworks is, that these projects are not so well documented and there is only a small community which makes it very difficult to find information or help when problems occur.
+Generally speaking, the biggest problem with the above mentioned very young frameworks is that these projects are not so well documented and there is only a small community which makes it very difficult to find information or help when problems occur.
 This disqualifies these frameworks as possible candidates.
 
 One of the more matured and proven frameworks is Backbone JS.
 A lot of really large and impressive projects are built with backbone.js such as LinkedIn, AirBnB, Trello or FourSquare.
-Hence its maturity, it is well documented and there is a large and active community which makes it easy to find help.
+Hence its maturity it is well documented and there is a large and active community which makes it easy to find help.
 Backbone JS  consists of different components concerning all necessary aspects of building single page web application such as models, views and routers.
-Thus application built with backbone normally have a clear defined structure \autocite{tech-ana:heise-backbone}.
+Thus applications built with backbone normally have a clear defined structure \autocite{tech-ana:heise-backbone}.
 Backbone has built in support for persisting model data to REST apis.
 To make this built in component to work properly it is necessary to have a correlation of your model names and the REST api paths.
-The backend connection can be implemented manually if the standard one is not suited.
-There are already some existing Modules that do this like Backbone.localstorage which stores all data in the Browser itself.
+The backend connection can be implemented manually if the default one is not suited.
+There are already some existing modules that do this, like Backbone.localstorage which stores all data in the browser itself.
 
-An adverse is, that Backbone JS is not able to reflect changed model data to the view automatically (and vice versa).
+A disadvantage is, that Backbone JS is not able to reflect changed model data to the view automatically (and vice versa).
 Backbone's approach to achieve this is much more lightweight.
 Each model can fire a set of events.
 A backbone view can listen to these events.
 Each view has a render function, which generates the HTML for displaying the view.
 This function needs to be implemented manually for each view.
 This approach allows it to use any templating engine.
-Since backbone needs the dependency to underscore, you can use the templating function from this library.
-Another drawback is that, backbone does not manage the display of different views.
-Admittedly it provides a router object, but again, this objects just defines what function should be executed when a route is loaded.
+Since Backbone needs the dependency to Underscore.js , you can use the templating function from this library.
+Another drawback is that Backbone does not manage the display of different views.
+Admittedly, it provides a router object, however this objects just defines what function should be executed when a route is loaded.
 The developer has to initialize the new view and to destroy all views no longer needed.
 There is always the danger of memory leaks which causes several performance and security issues.
-At least, using backbone means a lot of initialisation overhead, since it is first necessary to define the domain model and set up the infrastructure.
+At least, using backbone means a lot of initialisation overhead since it is first necessary to define the domain model and set up the infrastructure.
 Considering all this disqualifies Backbone JS as possible candidate.
       
-The remaining 3 Frameworks does not have any of the above mentioned drawbacks and are used for a much more detailed examiniation described in the following chapter.
+The remaining three Frameworks do not have any of the above mentioned drawbacks and are used for a much more detailed examiniation described in the following chapter.
 
 \subsection{Comparison of AngularJS, EmberJS and KnockoutJS}\label{chap:detail_comparison}
 
 \subsubsection{Knockout JS}
 
-Knockout JS is a more leightweight library, which emphasis is to implent the MVVM (Model-View-ViewModel) pattern for HTML.
-This pattern enriches HTML with two way data binding and a seperation of concerns, which means that the application logic is seperated from the business logic and the model.
+Knockout JS is a rather leightweight library, with emphasis on the implementation of the MVVM (Model-View-ViewModel) pattern for HTML.
+This pattern enriches HTML with two way data binding and a seperation of the view and the domain model. One main advantage is that putting the whole UI logic into the seperated vie model that it is possible to write unit tests for the UI logic.
 
-The two way data binding is implemented by using special Java Script Objects, so called Knockout observables and a special HTML attribute both provided by Knockout.
+The two way data binding is implemented by using special JavaScript Objects, so called Knockout observables, and a special HTML attribute both provided by Knockout.
 Thus model changes are automatically reflected to the view.
 Listing \ref{lst:ko-1} demonstrates how to bind a property of a ViewModel to an HTML textfield element.
 
@@ -136,16 +136,15 @@ ko.applyBindings(new ViewModel());
 
 The data-bind attribute of the input element (see line 3 in listing \ref{lst:ko-2}) tells Knockout to bind the properties of the ViewModel object to an attribute of the containing element (in this case the value attribute of the input element).
 There is a large set of predefined bindings for different purposes.
-There are controlling and appearance bindings such as the visible or the style binding, control flow bindings such as the foreach binding to iterate over a set of ViewModel properties and at least, form field bindings.
+There are controlling and appearance bindings, such as the visible or the style binding, control flow bindings, such as the foreach binding to iterate over a set of ViewModel properties, and form field bindings.
 If these bindings are not sufficient it is possible to create custom bindings.
-
 
 The last line in listing \ref{lst:ko-1} binds the ViewModel to the view.
 After that all changes in the ViewModel are reflected to the input element and vice versa.
 The ViewModel itself defines two different sort of properties.
 The properties 'firstName' and 'lastName' are normal observables.
 The 'fullName' property is a computed observable which can be any calculated value, also considering other observables.
-Since the properties are special Knockout objects, it is necessary to access the property values like a function (see line 5 in listing \ref{lst:ko-1}).
+Since the properties are special Knockout objects it is necessary to access the property values like a function (see line 5 in listing \ref{lst:ko-1}).
 
 \begin{figure}[h]
 	\centering	
@@ -156,7 +155,7 @@ Since the properties are special Knockout objects, it is necessary to access the
 
 Knockout also provides a more convenient way to define the properties of a ViewModel, the mapping plugin.
 The mapping plugin converts any property of any JSON object to a Knockout observable in order to act as ViewModel.
-The following listing (\ref{ko_mapping}) shows the above introduced name example with the mapping plugin.
+Listing (\ref{ko_mapping}) shows the previously introduced name example with the mapping plugin.
 
 \begin{lstlisting}[label=ko_mapping,caption=the mapping plugin]
 var person = {
@@ -168,29 +167,29 @@ var person = {
 var viewModel = ko.mapping.fromJS(person);
 \end{lstlisting}
 
-Knockout JS doesn't support attaching a server side backend or REST API.
-Furthermore it is not able to route between different pages of your application.
-Thus these parts of the SPA has to be implemented by your own or with additional frameworks.
+Knockout JS does not support attaching a server side backend or REST API.
+Furthermore, it is not able to route between different pages of your application.
+Thus these parts of the application has to be implemented by the user or an additional frameworks must be used.
 
 \subsubsection{Ember JS}
 
 Ember JS is one of the younger frameworks, mainly created by Yehuda Katz and Tom Dale and introduced in December 2011 \autocite{tech-ana:announcing-ember}.
 In this short time Ember JS could make a really impressive progress and has gained a lot of attraction which can be concluded from the number of github stars and watches.
-It comprises all necessary parts for building web applications including two way data binding with templates, a routing mechanism and provides a way to connect the application to REST API's.
+It comprises all necessary parts for building web applications including two way data binding with templates, a routing mechanism and provides a way to connect the application to REST APIs.
 
 Ember is a very stringent and opinionated framework and is built upon concepts such as DRY (dont repeat yourself) and CoC (Convention over Configuration).
-Especially the usage of naming conventions allows it to write applications with a nominal amount of code.
-The disadvantage of this is, that it is more sophisticated to get started with Ember.js because the philosophy and the concepts of Ember need to be understand in first step.
+Especially the usage of naming conventions allows it to write applications with a minimal amount of code.
+The disadvantage of this is that it is more sophisticated to get started with Ember.js because the philosophy and the concepts of Ember need to be understood first.
 The full stack and opinionated approach are the reason why Ember is one of the largest frameworks (56k).
 
-It uses Handlebars as its templating engine, which is a very popular string based templating engine.
-Ember.js also provides a way to connect your application to RESTful WebServices with an additional project ember-data.
-As well as Ember itself, ember-data highly makes use of the Convention over Configuration principle which means that ember-data expects the data provided by a REST-Service in a special format.
+It uses Handlebars as templating engine which is a very popular string based templating engine.
+Ember.js also provides a way to connect your application to RESTful WebServices with an additional project, ember-data.
+As well as Ember itself ember-data highly makes use of the Convention over Configuration principle which means that ember-data expects the data provided by a REST-Service in a special format.
 The Ember team substantiate : "[...]we don't think most web developers should have to write any custom XHR code for loading data.
 Strong conventions on the client and strong conventions on the server should allow them to communicate automatically." \autocite{tech-ana:ember-data}.
-Besides Ember-Data it is also possible to use any other server connection implementation.
+Besides ember-data it is also possible to use any other server connection implementation.
 
-To build an Ember application it is first necessary to create an instance of an Ember.Application object (see listing \ref{em_js}).
+To build an Ember application it is necessary to create an instance of an Ember.Application object (see listing \ref{em_js}) first.
 \begin{lstlisting}[label=em_js, caption=app.js]
 var App = Ember.Application.create();
 \end{lstlisting}
@@ -233,19 +232,20 @@ var App = Ember.Application.create();
 Creating the application object defines the namespace of the application.
 All other classes, like Routers, Controllers, Views or Models are defined as properties of the application object.
 This has the advantage that the JavaScript namespace does not get polluted by application depended objects.
-Besides some other initialisation, the create() statement automatically creates a default router for the application.
-The default router first sets up the ApplicationRoute with the ApplicationTemplate, a pre-defined and special route only for application startup.The ApplicationTemplate is defined in listing \ref{em_html} in line 10.
-By convention Ember treats this as Application template in fact the id attribute of the script tag is missing.
+Besides some other initialisation the create() statement automatically creates a default router for the application.
+The default router first sets up the ApplicationRoute with the ApplicationTemplate, a pre-defined and special route only for application startup.
+The ApplicationTemplate is defined in listing \ref{em_html} in line 10.
+By convention Ember treats this as ApplicationTemplate because the id attribute of the script tag is missing.
 
 The ApplicationTemplate is the right place for static content like headers, footers or menu bars, in fact it gets always rendered first.
 The \{\{outlet\}\} tag tells ember where to fill in dynamic content that depends on the currently loaded route.
 After this initialization the Ember router starts the routing process and routes to the current route.
 This is normally the plain basic url.
-This path is connected per convetion to Embers IndexRoute so that the Router takes all steps to initialize the IndexRoute.
-One important note to mention here, is that the templates are standard handlebars templates.
+This path is connected per convention to Embers IndexRoute so that the Router takes all steps to initialize the IndexRoute.
+One important note to mention here is that the templates are standard handlebars templates.
 
-As outlined above, a very central concept of Ember is routing.
-Every Ember application needs a Router in fact the router translates a URL into a series of templates and is responsible for loading these templates as well as respective model data and sets up other application state.
+As outlined before, a very central concept of Ember is routing.
+Every Ember application needs a Router because the Router translates a URL into a series of templates and is responsible for loading these templates as well as respective model data and sets up other application state.
 Listing \ref{lst:em_router} demonstrates a Router definition with two different routes.
 
 \begin{lstlisting}[label=lst:em_router,caption=Router Defintion in Ember]
@@ -255,8 +255,8 @@ App.Router.map(function() {
 });
 \end{lstlisting}
 
-Embers routing mechanism is good example how the CoC apporach is used in Ember to avoid boilerplate code. As listing \ref{lst:em_router} depicts, only the routes itself are defined but no programming logic that defines how to set up the routes. 
-This is because a naming convention is used to reason from the current url to the route name and from the route name to the controller and the template to display.
+Embers routing mechanism is a good example how the CoC apporach is used to avoid boilerplate code. As listing \ref{lst:em_router} depicts only the routes itself are defined but no programming logic that defines how to set up the routes. 
+This is because a naming convention is used to map the current url to the route name and from the route name to the controller and the template to display.
 The table in figure \ref{fig:ember_routes} demonstrates the naming convention.
 
 \begin{figure}
@@ -265,10 +265,10 @@ The table in figure \ref{fig:ember_routes} demonstrates the naming convention.
 	\label{fig:ember_routes}
 \end{figure}
 
-Starting the above mentioned code snippets would result in a page showing empty input fields for both properties, because the templates that are involved are not backed with a model that contains data the templates should display.
+Starting the code snippets \ref{em_js} - \ref{lst:em_router} would result in a page showing empty input fields for both properties because the templates that are involved are not backed with a model that contains data for the templates to display.
 
-Every template is backed by a model, and the route defines what model should be used by the template .
-As depicted in the table above, ember will look for an App.IndexRoute by convention, so this is the right place where we need to point to the model.
+Every template is backed by a model and the route defines what model should be used by the template.
+As depicted in table \ref{fig:ember_routes} ember will look for an App.IndexRoute by convention. So this is the right place to point to the model.
 
 \begin{lstlisting}[label=em_controller,caption=app.js]
 var App = Ember.Application.create();
@@ -294,16 +294,15 @@ App.IndexRoute = Ember.Route.extend({
 });
 \end{lstlisting}
 
-Listing \ref{em_controller} needs some more explanation.
-First at all we define a model class called Person which has the same properties as in the Knockout example.
-In order to do this, we need to extend a special ember class in fact we want to bind to these properties int the templates.
-After that, we create an instance of this class and set the needed Properties.
-In line 15 we declare the controller which should be used for the IndexRoute.
-In Ember a Controller is the component that manages the display logic and the application state.
-It is comparable to Knockout's ViewModel object.
-As mentioned earlier, each template is backed by a model.
-To be more precise, templates retrieve their properties from the controller which decorates the model and provide proxy attributes to avoid for an easier access in the templates. Figure \ref{fig:ember_coupling} visualise how templates, controllers and model are related to each other.
-In the IndexRoute object, we finally point to our model instance.
+In listing \ref{em_controller} a model class called Person is defined first, which has the same properties as in the Knockout example.
+In order to do this a special ember class is extended in order to bind to these properties int the templates.
+After that an instance of this class is created and the needed properties are set.
+In line 15 the controller which should be used for the IndexRoute is declared.
+In Ember a controller is the component that manages the UI logic and the application state.
+It is comparable to ViewModel object of Knockout.
+As mentioned earlier each template is backed by a model.
+To be more precise templates retrieve their properties from the controller which decorates the model and provides proxy attributes to avoid for an easier access in the templates. Figure \ref{fig:ember_coupling} visualises how templates, controllers and models are related to each other.
+The last step in the IndexRoute object is to point to the model instance.
 
 \begin{figure}
 	\centering	\includegraphics[width=0.45\textwidth]{./img/tech-ana/ember_controller_coupling.png}
@@ -311,13 +310,12 @@ In the IndexRoute object, we finally point to our model instance.
 	\label{fig:ember_coupling}
 \end{figure} 
  
+By default it is not necessary to define a controller for the IndexRoute but by convention Ember assumes that the IndexController manages a list of model objects and therefore expects an array for the model property.
+Another way to achieve the same thing is demonstrated in listing \ref{em_2}.
+A special Ember Array is defined and the created Person instance is added to it. Finally the IndexRoute must point to the array instead.
+Since the model is now an array the template needs to be adopted to iterate over all existing array members (see listing \ref{em_array_template}).
 
-Per default it is not necessary to define a controller for the IndexRoute, but by convention Ember assumes that the IndexController manages a list of model objects and therefore expects an array for the model property.
-Another way to achieve the same thing, is demonstrated in the following listing.
-We simply define an special Ember Array and add our created Person instance to it, and finally point the IndexRoute to the array instead.
-Since we now have an array as our model, we need to adjust the template, to iterate over all existing array members (see listing \ref{em_array_template}).
-
-\begin{lstlisting}[caption=app.js]
+\begin{lstlisting}[label=em_2,caption=app.js]
 var persons = Ember.A();
 persons.pushObject(myself);
 
@@ -345,20 +343,19 @@ App.IndexRoute = Ember.Route.extend({
 </script>
 \end{lstlisting}
 
-If we start that application we see that the input fields are properly bound to the model properties.
-But if we change the first name or last name in the input field these changes are not reflected to the p-element at the bottom of the page.
-This is because Ember does not know how to react on events that are fired on user reaction.
-If we want to react on user events and enable a two way data binding,  we need to use an Ember View instead. In Ember, views
-\enquote{[...] are responsible for responding to user events, like clicks, drags, and scrolls, as well as updating the contents of the DOM when the data underlying the view changes.} \autocite{tech-ana:em-views}.
+If that application is started the input fields are properly bound to the model properties.
+But if the first name or last name in the input field is changed, these changes are not reflected to the p-element at the bottom of the page.
+This is because Ember does not know how to react on events that are fired on user interaction.
+To react on user events and enable a two way data binding an Ember View needs to be used instead. Ember Views \enquote{[...] are responsible for responding to user events, like clicks, drags, and scrolls, as well as updating the contents of the DOM when the data underlying the view changes.} \autocite{tech-ana:em-views}.
 Luckily, Ember has a small set of built in views which are Ember.Checkbox, Ember.TextField, Ember.Select and Ember.Textarea.
-If necessary, it is also possible to create custom views.
-Therefore the only thing we need to change is to replace the input element with an Ember.TextField view as demonstrated in listing \ref{em_view}
+If necessary it is also possible to create custom views.
+Therefore the only thing that needs to be changed is to replace the input element with an Ember.TextField view as demonstrated in listing \ref{em_view}
 
 \begin{lstlisting}[label=em_view,caption=Ember Views]
 	{{view Ember.TextField valueBinding="firstName"}}
 \end{lstlisting}
 
-As mentioned earlier, Ember also provides a way to automatically connect Ember Models to an REST API. However, an explanation of this module would be out of the scope of this chapter, hence no furhter basic concepts are involved. Furthermore, using ember data has some crucial disadvantages which are discussed in section \ref{chap:fw-discussion}.
+As mentioned earlier Ember also provides a way to automatically connect Ember Models to an REST API. However this module does not come up with further concepts that are relevant to understand the Ember framework itself.
 
 \subsubsection{Angular JS}  
 
