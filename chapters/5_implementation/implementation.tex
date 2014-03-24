@@ -30,7 +30,7 @@ During the Navigator start, the \texttt{PropertyManager} class loads the configu
 For each property the \texttt{PropertyManager} has corresponding getter and setter functions.
 It is implemented as a singleton, which easily allows to use it everywhere where access to the settings is needed.
 There are already two existing implementations that uses different browser APIs.
-Hence the current implementation uses CalpaHTML as default case, there is only one boolean property called \enquoute{\texttt{useFlyingSaucer}} that indicates to use the \texttt{DescriptionPaneFS} class, a description pane that uses the FlyingSaucer API.
+Hence the current implementation uses CalpaHTML as default case, there is only one boolean property called \enquote{\texttt{useFlyingSaucer}} that indicates to use the \texttt{DescriptionPaneFS} class, a description pane that uses the FlyingSaucer API.
 One possible solution for introducing a JavaFX based description pane is to introduce a new property similar to the already existing one.
 Following this approach has the drawback that there are different properties for configuring the same functionality.
 Furthermore, the name of the \enquote{\texttt{useFlyingSaucer}} property does not indicate very well what functionality is exactly configured.

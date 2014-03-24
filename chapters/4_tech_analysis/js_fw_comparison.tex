@@ -49,7 +49,7 @@ The Todo MVC app also lists combinations of different frameworks which are also 
 	\item KnockoutJS
 	\end{minipage}
 \end{itemize}
-\\
+
 
 Dojo as well as YUI (Yahoo! User Interface) are not MVC frameworks in the proper meaning of an MVC framework.
 Similar to JQuery they rather are DOM/Ajax wrapping libraries which is a more suitable description for those frameworks.
@@ -501,7 +501,7 @@ Figure \ref{fig:angular_views} gives a good overview over this process.
 There are a few more concepts in Angular that helps and simplifies Single Page Applications development with Angular.
 A really useful feature that makes Angular outstanding are filters.
 Filters are a way to format data that should be displayed to the user.
-For example, if we want to print the \texttt{fullName} property of our basic example in uppercase letters we just need to use the \textt{uppercase} filter provided by Angular (see listing \ref{angular_filters}).
+For example, if we want to print the \texttt{fullName} property of our basic example in uppercase letters we just need to use the \texttt{uppercase} filter provided by Angular (see listing \ref{angular_filters}).
 Angular already provides a basic set of very useful filters. 
 Among them are filters for ordering or filtering lists of data but it is also possible to create custom ones.
 Filters are used in Angular expressions with an pipe like syntax.
@@ -518,7 +518,7 @@ Filters are used in Angular expressions with an pipe like syntax.
 \end{figure} 
 
 The last concept are services.
-Services in Angular applicationss are substitutable objects that are wired together using dependency injection. Angular services are implemented as singletons and are used to carry out specific tasks common to web apps and reusable business logic independent of views. Angular provides an impressive set of services such as the \texttt{\$http} service that provides low level access to the browser's XMLHttpRequest object and can be used to make AJAX requests.
+Services in Angular applications are substitutable objects that are wired together using dependency injection. Angular services are implemented as singletons and are used to carry out specific tasks common to web apps and reusable business logic independent of views. Angular provides an impressive set of services such as the \texttt{\$http} service that provides low level access to the browser's XMLHttpRequest object and can be used to make AJAX requests.
 
 The routing mechanism is also implemented as service. This has the advantage that it can be easily injected by dependency injection in every module that wants to use the routing mechanism. 
 The routing service tries to map the path of the current location to an existing route definition. Listing \ref{lst:ng-routes} demonstrates that a route definition basically consists of the template that should be loaded and the controller function the route is related with. 
